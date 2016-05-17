@@ -1,5 +1,7 @@
 package com.View;
 
+import com.Controller.LoginController;
+import com.Controller.ViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,6 +20,9 @@ import javafx.stage.Stage;
  * Created by Dom on 2016-05-17.
  */
 public class RegisterView {
+    LoginController loginController = new LoginController();
+    ViewController viewController = new ViewController();
+
     public void start()
     {
         Stage stage = new Stage();
@@ -70,10 +75,10 @@ public class RegisterView {
         final TextField emailField = new TextField();
         emailField.setStyle("-fx-font-size: 16");
 
-        Button exit = new Button("Exit");
+        Button exit = new Button("Back");
         Button register = new Button("Register");
         exit.setStyle("-fx-min-width: 80px;\n" +
-                "    -fx-max-width: 80px;\n" +
+                "    -fx-max-width: 100px;\n" +
                 "    -fx-background-color:\n" +
                 "            #000000,\n" +
                 "            #984639;\n" +
@@ -112,7 +117,7 @@ public class RegisterView {
         GridPane.setConstraints(emailField, 1, 7);
 
 
-        GridPane.setConstraints(register, 0,8);
+        GridPane.setConstraints(register, 1,8);
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -123,6 +128,7 @@ public class RegisterView {
         stage.show();
 
         exit.setOnAction(event -> {
+        loginController.startLoginWindow();
             stage.close();
         });
     }

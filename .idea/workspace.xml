@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57db59a5-7561-41d1-b6f0-0e45d4d1f6bd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/View/pics/landscape-03.jpg" afterPath="$PROJECT_DIR$/src/com/View/pics/landscape-03.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/View/LoginView.java" afterPath="$PROJECT_DIR$/src/com/View/LoginView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/View/RegisterView.java" afterPath="$PROJECT_DIR$/src/com/View/RegisterView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/View/style.css" afterPath="$PROJECT_DIR$/src/com/View/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Candela.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,21 +49,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoginView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/View/LoginView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="137" column="11" selection-start-line="135" selection-start-column="8" selection-end-line="137" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.5405405">
+              <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegisterView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RegisterView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/View/RegisterView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8277027">
-              <caret line="125" column="26" selection-start-line="125" selection-start-column="26" selection-end-line="125" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="119" column="43" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,8 +143,8 @@
         <option value="$PROJECT_DIR$/src/com/Controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/com/Controller/ViewController.java" />
         <option value="$PROJECT_DIR$/src/com/View/style.css" />
-        <option value="$PROJECT_DIR$/src/com/View/LoginView.java" />
         <option value="$PROJECT_DIR$/src/com/View/RegisterView.java" />
+        <option value="$PROJECT_DIR$/src/com/View/LoginView.java" />
       </list>
     </option>
   </component>
@@ -603,12 +600,12 @@
       <workItem from="1463471346783" duration="1351000" />
       <workItem from="1463475829355" duration="2194000" />
       <workItem from="1463482747242" duration="391000" />
-      <workItem from="1463497244701" duration="5701000" />
+      <workItem from="1463497244701" duration="6525000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11348000" />
+    <option name="totallyTimeSpent" value="12172000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1111,14 +1108,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/View/LoginView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="137" column="11" selection-start-line="135" selection-start-column="8" selection-end-line="137" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/View/MenuView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1131,11 +1120,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/View/RegisterView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8277027">
-          <caret line="125" column="26" selection-start-line="125" selection-start-column="26" selection-end-line="125" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="43" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/View/LoginView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5405405">
+          <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>

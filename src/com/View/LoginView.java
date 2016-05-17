@@ -79,8 +79,8 @@ public class LoginView {
                 "    -fx-padding: 12 30 12 30;\n" +
                 "    -fx-text-fill: white;\n" +
                 "    -fx-font-size: 10px;");
-        register.setStyle("-fx-min-width: 130px;\n" +
-                "    -fx-max-width: 130px;\n" +
+        register.setStyle("-fx-min-width: 100px;\n" +
+                "    -fx-max-width: 100px;\n" +
                 "    -fx-background-color:\n" +
                 "            #000000,\n" +
                 "            #984639;\n" +
@@ -88,11 +88,13 @@ public class LoginView {
                 "    -fx-background-radius: 3,2,2,2;\n" +
                 "    -fx-padding: 12 30 12 30;\n" +
                 "    -fx-text-fill: white;\n" +
-                "    -fx-font-size: 12px;");
+                "    -fx-font-size: 10px;");
 
         //locating the text fields and labels
 
-        exitAndRegister.getChildren().addAll(exit);
+        exitAndRegister.getChildren().addAll(exit, register);
+        exitAndRegister.setPadding(new Insets(10,5,5,10));
+        exitAndRegister.setSpacing(5);
         GridPane.setConstraints(scenetitle, 0, 0);
         GridPane.setConstraints(errorLabel, 0, 1);
         GridPane.setConstraints(user, 0, 2);
@@ -105,23 +107,20 @@ public class LoginView {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        gridPane.getChildren().addAll(scenetitle, errorLabel, user, userField, password, passwordText, logIn, register);
+        gridPane.getChildren().addAll(scenetitle, errorLabel, user, userField, password, passwordText, logIn);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setResizable(true);
         primaryStage.show();
 
-        logIn.setOnAction(event->
+        logIn.setOnAction(event ->
         {
-           String  userSField = userField.getText();
+            String userSField = userField.getText();
             String passwordField = passwordText.getText();
             if (loginController.logIn(userSField, passwordField)) {
-                if(loginController.ladmin == 0)
-                {
+                if (loginController.ladmin == 0) {
                     viewController.startMenu();
                     primaryStage.close();
-                }
-                else
-                {
+                } else {
                     errorLabel.setText("Wrong User Name or Password, try again.");
                 }
             }
