@@ -1,5 +1,6 @@
 package com;
 
+import com.Controller.LoginController;
 import com.View.LoginView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,16 +13,17 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
         LoginView loginView = new LoginView();
-        //LoginViewController loginViewController = new LoginViewController();
+        LoginController loginController = new LoginController();
 
 
         public static void main(String[] args) {
+
 
             launch(args);
         }
 
         @Override
         public void start(Stage primaryStage) throws Exception {
+            loginController.startLoginWindow();
         }
     }
-}
