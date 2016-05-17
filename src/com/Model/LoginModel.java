@@ -9,7 +9,7 @@ public class LoginModel {
     private Connection conn=null;
     String loggedUser = null;
     boolean logged = false;
-    int lAdmin;
+    public int lAdmin;
 
     public void connectToDB(){
         try
@@ -29,6 +29,7 @@ public class LoginModel {
 
     //made by Adam
     public boolean logIn(String userName, String password){
+        connectToDB();
         String dbUsername, dbPassword;
         int dbAdmin;
         boolean logged = false;

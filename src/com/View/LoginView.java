@@ -1,6 +1,9 @@
 package com.View;
 
 
+import com.Controller.LoginController;
+import com.Controller.ViewController;
+import com.Model.LoginModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,7 +24,8 @@ public class LoginView {
 
 
     public void start(){
-        //LoginController loginController = new LoginController();
+        final LoginController loginController = new LoginController();
+        final ViewController viewController = new ViewController();
 
         //creating scene
         Stage primaryStage = new Stage();
@@ -45,11 +49,11 @@ public class LoginView {
         errorLabel.setStyle("-fx-font-size: 15;-fx-text-fill: crimson;-fx-font-weight:bold;");
         Label user = new Label("User");
         user.setStyle("-fx-font-size: 20");
-        TextField userField = new TextField();
+        final TextField userField = new TextField();
         userField.setStyle("-fx-font-size: 16");
         Label password = new Label("Password");
         password.setStyle("-fx-font-size: 20");
-        TextField passwordText = new TextField();
+        final TextField passwordText = new TextField();
         passwordText.setStyle("-fx-font-size: 16");
         Button logIn = new Button("Log In");
         Button exit = new Button("Exit");
@@ -89,10 +93,10 @@ public class LoginView {
         //locating the text fields and labels
 
         exitAndRegister.getChildren().addAll(exit);
-        GridPane.setConstraints(scenetitle,0,0);
-        GridPane.setConstraints(errorLabel,0,1);
-        GridPane.setConstraints(user,0,2);
-        GridPane.setConstraints(userField,1,2);
+        GridPane.setConstraints(scenetitle, 0, 0);
+        GridPane.setConstraints(errorLabel, 0, 1);
+        GridPane.setConstraints(user, 0, 2);
+        GridPane.setConstraints(userField, 1, 2);
         GridPane.setConstraints(password,0,3);
         GridPane.setConstraints(passwordText,1,3);
         GridPane.setConstraints(logIn,1,4);
@@ -101,15 +105,40 @@ public class LoginView {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        gridPane.getChildren().addAll(scenetitle,errorLabel,user,userField,password,passwordText,logIn,register);
+        gridPane.getChildren().addAll(scenetitle, errorLabel, user, userField, password, passwordText, logIn, register);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.show();
 
+
+        logIn.setOnAction(event->
+        {
+           String  userSField = userField.getText();
+            String passwordField = passwordText.getText();
+            if (loginController.logIn(userSField, passwordField)) {
+                if(loginController.ladmin == 0)
+                {
+                    viewController.startMenu();
+                    primaryStage.close();
+                }
+                else
+                {
+                    errorLabel.setText("Wrong User Name or Password, try again.");
+                }
+            }
+        });
+
+        register.setOnAction(event -> {
+            viewController.startRegister();
+            primaryStage.close();
+        });
+
+
+        exit.setOnAction(event -> {
+            primaryStage.close();
+        });
+
     }
-
-
-
 
     }
 
