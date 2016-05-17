@@ -107,9 +107,8 @@ public class LoginView {
 
         gridPane.getChildren().addAll(scenetitle, errorLabel, user, userField, password, passwordText, logIn, register);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
-
 
         logIn.setOnAction(event->
         {
