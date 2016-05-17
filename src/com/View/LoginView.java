@@ -41,7 +41,7 @@ public class LoginView {
         primaryStage.setScene(scene);
 
 
-        Label errorLabel = new Label("");//////////////////BY MONICA/////////////////
+        Label errorLabel = new Label("");//////////////////BY MAZUR/////////////////
         errorLabel.setStyle("-fx-font-size: 15;-fx-text-fill: crimson;-fx-font-weight:bold;");
         Label user = new Label("User");
         user.setStyle("-fx-font-size: 20");

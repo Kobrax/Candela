@@ -1,5 +1,6 @@
 package com.Controller;
 
+import com.Model.LoginModel;
 import com.View.LoginView;
 
 /**
@@ -8,6 +9,7 @@ import com.View.LoginView;
 public class LoginController {
 
     LoginView loginView = new LoginView();
+    LoginModel loginModel = new LoginModel();
 
 
     public void startLoginWindow(){
