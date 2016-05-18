@@ -1,7 +1,9 @@
 package com.View;
 
 import com.Controller.LoginController;
+import com.Controller.RegisterController;
 import com.Controller.ViewController;
+import com.Model.RegisterModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,9 +21,9 @@ import javafx.stage.Stage;
 /**
  * Created by Dom on 2016-05-17.
  */
-public class RegisterView {  //bene
-    LoginController loginController = new LoginController();
+public class RegisterView {
     ViewController viewController = new ViewController();
+    private RegisterController registerController = new RegisterController();
 
     public void start()
     {
@@ -45,33 +47,33 @@ public class RegisterView {  //bene
 
         Label errorLabel = new Label("");//////////////////BY ADAM/////////////////
         errorLabel.setStyle("-fx-font-size: 15;-fx-text-fill: crimson;-fx-font-weight:bold;");
-        Label user = new Label("User");
-        user.setStyle("-fx-font-size: 20");
+        Label userLabel = new Label("User");
+        userLabel.setStyle("-fx-font-size: 20");
         final TextField userField = new TextField();
         userField.setStyle("-fx-font-size: 16");
 
-        Label password = new Label("Password");
-        password.setStyle("-fx-font-size: 20");
+        Label passwordLabel = new Label("Password");
+        passwordLabel.setStyle("-fx-font-size: 20");
         final TextField passwordText = new TextField();
         passwordText.setStyle("-fx-font-size: 16");
 
-        Label name = new Label("Name");
-        name.setStyle("-fx-font-size: 20");
+        Label nameLabel = new Label("Name");
+        nameLabel.setStyle("-fx-font-size: 20");
         final TextField nameField = new TextField();
         nameField.setStyle("-fx-font-size: 16");
 
-        Label surname = new Label("Surname");
-        surname.setStyle("-fx-font-size: 20");
+        Label surnameLabel = new Label("Surname");
+        surnameLabel.setStyle("-fx-font-size: 20");
         final TextField surnameField = new TextField();
         surnameField.setStyle("-fx-font-size: 16");
 
-        Label lArea = new Label("Living Area");
-        lArea.setStyle("-fx-font-size: 20");
+        Label lAreaLabel = new Label("Living Area");
+        lAreaLabel.setStyle("-fx-font-size: 20");
         final TextField lAreaField = new TextField();
         lAreaField.setStyle("-fx-font-size: 16");
 
-        Label email = new Label("Email");
-        email.setStyle("-fx-font-size: 20");
+        Label emailLabel = new Label("Email");
+        emailLabel.setStyle("-fx-font-size: 20");
         final TextField emailField = new TextField();
         emailField.setStyle("-fx-font-size: 16");
 
@@ -103,17 +105,17 @@ public class RegisterView {  //bene
         exitAndRegister.getChildren().addAll(exit);
         GridPane.setConstraints(scenetitle, 0, 0);
         GridPane.setConstraints(errorLabel, 0, 1);
-        GridPane.setConstraints(user, 0, 2);
+        GridPane.setConstraints(userLabel, 0, 2);
         GridPane.setConstraints(userField, 1, 2);
-        GridPane.setConstraints(password,0,3);
+        GridPane.setConstraints(passwordLabel,0,3);
         GridPane.setConstraints(passwordText,1,3);
-        GridPane.setConstraints(name, 0, 4);
+        GridPane.setConstraints(nameLabel, 0, 4);
         GridPane.setConstraints(nameField, 1, 4);
-        GridPane.setConstraints(surname, 0, 5);
+        GridPane.setConstraints(surnameLabel, 0, 5);
         GridPane.setConstraints(surnameField, 1,5);
-        GridPane.setConstraints(lArea, 0, 6);
+        GridPane.setConstraints(lAreaLabel, 0, 6);
         GridPane.setConstraints(lAreaField, 1, 6);
-        GridPane.setConstraints(email, 0, 7);
+        GridPane.setConstraints(emailLabel, 0, 7);
         GridPane.setConstraints(emailField, 1, 7);
 
 
@@ -122,13 +124,25 @@ public class RegisterView {  //bene
         gridPane.setAlignment(Pos.CENTER);
 
 
-        gridPane.getChildren().addAll(scenetitle, errorLabel, user, userField, password, passwordText, name, nameField, surname, surnameField, lArea, lAreaField, email, emailField, register);
+        gridPane.getChildren().addAll(scenetitle, errorLabel, userLabel, userField, passwordLabel, passwordText, nameLabel, nameField, surnameLabel, surnameField, lAreaLabel, lAreaField, emailLabel, emailField, register);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         stage.setResizable(true);
         stage.show();
 
+        register.setOnAction(event -> {
+            String userName = nameField.getText();
+            String password = passwordText.getText();
+            String email = emailField.getText();
+            String area = lAreaField.getText();
+            String name = nameField.getText();
+            String surname = surnameField.getText();
+            registerController.registerUser(userName, password, email, area, name, surname);
+            viewController.startLogin();
+            stage.close();
+                });
+
         exit.setOnAction(event -> {
-        loginController.startLoginWindow();
+        viewController.startLogin();
             stage.close();
         });
     }

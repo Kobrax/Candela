@@ -6,7 +6,7 @@ import java.sql.*;
  * Created by MazurJestBoski on 2016-05-13.
  */
 public class LoginModel {
-    private Connection conn=null;
+    public static Connection conn=null;
     String loggedUser = null;
     boolean logged = false;
     public int lAdmin;
