@@ -1,6 +1,7 @@
 package com.Model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -11,7 +12,9 @@ public class RegisterModel {
     LoginModel loginModel = new LoginModel();
      Connection conn = loginModel.conn;
 
+
     public void registerUser(String userName, String password, String email, String livingArea, String name, String surname){
+        loginModel.connectToDB();
         String sql="INSERT INTO users VALUES (null, ?, ?, ?, ?, ?, ?, 0)";
 
         try
