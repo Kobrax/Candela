@@ -9,12 +9,11 @@ import java.sql.SQLException;
  * Created by MazurJestBoski on 2016-05-18.
  */
 public class RegisterModel {
-    LoginModel loginModel = new LoginModel();
-     Connection conn = loginModel.conn;
+    private static Connection conn = LoginModel.conn;
 
 
     public void registerUser(String userName, String password, String email, String livingArea, String name, String surname){
-        loginModel.connectToDB();
+
         String sql="INSERT INTO users VALUES (null, ?, ?, ?, ?, ?, ?, 0)";
 
         try

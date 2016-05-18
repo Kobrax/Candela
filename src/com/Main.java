@@ -1,6 +1,7 @@
 package com;
 
 import com.Controller.LoginController;
+import com.Model.LoginModel;
 import com.View.LoginView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,8 +13,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-        LoginView loginView = new LoginView();
         LoginController loginController = new LoginController();
+    LoginModel loginModel = new LoginModel();
 
 
         public static void main(String[] args) {
@@ -25,5 +26,7 @@ public class Main extends Application {
         @Override
         public void start(Stage primaryStage) throws Exception {
             loginController.startLoginWindow();
+            loginModel.connectToDB();
+
         }
     }
