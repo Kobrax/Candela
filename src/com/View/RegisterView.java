@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * Created by Dom on 2016-05-17.
  */
-public class RegisterView {
+public class RegisterView {  //bene
     LoginController loginController = new LoginController();
     ViewController viewController = new ViewController();
 
