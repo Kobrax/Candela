@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -114,14 +115,37 @@ public class LoginView {
         primaryStage.setResizable(true);
         primaryStage.show();
 
+//////////////////////////////////////TableWindow////////////////////////////////////////////////
+        final Label labelLot = new Label("Your lots");
+        labelLot.setFont(new Font("Arial", 20));
 
+       Button buttonMain1 = new Button("Add");
+       Button buttonMain2 = new Button("Edit");
+       Button buttonMain3 = new Button("Delete");
 
         BorderPane borderPane1 = new BorderPane();
         Scene scene1 = new Scene(borderPane1, 700,700);
         lotTableController.tableView = new TableView();
         lotTableController.createTable(loggedUser);
+
+        Button compareButton = new Button("Compare");
+        VBox tableVbox = new VBox();
+        Button searchButton = new Button("Search");
+        TextField searchfield = new TextField();
+        HBox hBox2 = new HBox(5);
+        hBox2.getChildren().addAll(searchfield, searchButton);
+
         ScrollPane scrollPane = new ScrollPane(lotTableController.tableView);
-        borderPane1.setLeft(scrollPane);
+        HBox hBox1 = new HBox(5);
+        hBox1.getChildren().addAll(buttonMain1, buttonMain2, buttonMain3, compareButton);
+        tableVbox.setSpacing(5);
+        tableVbox.setPadding(new Insets(10, 0, 0, 10));
+        tableVbox.getChildren().addAll(labelLot, scrollPane, hBox1, hBox2);
+        borderPane1.setLeft(tableVbox);
+        borderPane1.setBottom(exit);
+        borderPane1.setId("backgroundImage");
+        scene1.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
 
 
         logIn.setOnAction(event ->
