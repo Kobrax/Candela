@@ -10,7 +10,8 @@ import com.View.MenuView;
 public class LoginController {
 
     LoginModel loginModel = new LoginModel();
-    public int ladmin = 0;
+    public int ladmin = loginModel.lAdmin;
+    public String loggedUser = loginModel.loggedUser;
 
 
     public void startLoginWindow(){
@@ -18,11 +19,6 @@ public class LoginController {
         loginView.start();
     }
 
-    public int isAdmin()
-    {
-        ladmin = loginModel.lAdmin;
-        return ladmin;
-    }
 
     public boolean logIn(String userName, String password)
     {

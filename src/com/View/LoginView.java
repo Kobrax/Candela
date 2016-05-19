@@ -2,6 +2,7 @@ package com.View;
 
 
 import com.Controller.LoginController;
+import com.Controller.LotTableController;
 import com.Controller.ViewController;
 import com.Model.LoginModel;
 import javafx.geometry.Insets;
@@ -26,6 +27,8 @@ public class LoginView {
     public void start(){
         final LoginController loginController = new LoginController();
         final ViewController viewController = new ViewController();
+        final LotTableController lotTableController = new LotTableController();
+
 
         //creating scene
         Stage primaryStage = new Stage();
@@ -118,6 +121,7 @@ public class LoginView {
             String passwordField = passwordText.getText();
             if (loginController.logIn(userSField, passwordField)) {
                 if (loginController.ladmin == 0) {
+                    lotTableController.createTable(userSField);
                     viewController.startMenu();
                     primaryStage.close();
                 } else {

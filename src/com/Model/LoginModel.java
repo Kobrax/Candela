@@ -7,7 +7,7 @@ import java.sql.*;
  */
 public class LoginModel {
     public static Connection conn = null;
-    String loggedUser = null;
+    public String loggedUser = null;
     boolean logged = false;
     public int lAdmin;
 
