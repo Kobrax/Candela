@@ -22,12 +22,12 @@ import javafx.stage.Stage;
 public class LoginView {
 
 
-
+String loggedUser;
     public void start(){
         final LoginController loginController = new LoginController();
         final ViewController viewController = new ViewController();
+        MenuView menuView = new MenuView();
         final LotTableController lotTableController = new LotTableController();
-        String loggedUser = loginController.loggedUser;
 
 
         //creating scene
@@ -115,37 +115,6 @@ public class LoginView {
         primaryStage.setResizable(true);
         primaryStage.show();
 
-//////////////////////////////////////TableWindow////////////////////////////////////////////////
-        final Label labelLot = new Label("Your lots");
-        labelLot.setFont(new Font("Arial", 20));
-
-       Button buttonMain1 = new Button("Add");
-       Button buttonMain2 = new Button("Edit");
-       Button buttonMain3 = new Button("Delete");
-
-        BorderPane borderPane1 = new BorderPane();
-        Scene scene1 = new Scene(borderPane1, 700,700);
-        lotTableController.tableView = new TableView();
-        lotTableController.createTable(loggedUser);
-
-        Button compareButton = new Button("Compare");
-        VBox tableVbox = new VBox();
-        Button searchButton = new Button("Search");
-        TextField searchfield = new TextField();
-        HBox hBox2 = new HBox(5);
-        hBox2.getChildren().addAll(searchfield, searchButton);
-
-        ScrollPane scrollPane = new ScrollPane(lotTableController.tableView);
-        HBox hBox1 = new HBox(5);
-        hBox1.getChildren().addAll(buttonMain1, buttonMain2, buttonMain3, compareButton);
-        tableVbox.setSpacing(5);
-        tableVbox.setPadding(new Insets(10, 0, 0, 10));
-        tableVbox.getChildren().addAll(labelLot, scrollPane, hBox1, hBox2);
-        borderPane1.setLeft(tableVbox);
-        borderPane1.setBottom(exit);
-        borderPane1.setId("backgroundImage");
-        scene1.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
 
 
         logIn.setOnAction(event ->
@@ -154,11 +123,8 @@ public class LoginView {
             String passwordField = passwordText.getText();
             if (loginController.logIn(userSField, passwordField)) {
                 if (loginController.ladmin == 0) {
-                    lotTableController.resetTable();
-                    lotTableController.createTable(userSField);
-                    //viewController.startMenu();
-                    //primaryStage.close();
-                    primaryStage.setScene(scene1);
+                    viewController.startMenu(userSField);
+                    primaryStage.close();
                 } else {
                     errorLabel.setText("Wrong User Name or Password, try again.");
                 }

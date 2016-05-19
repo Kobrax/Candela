@@ -2,35 +2,113 @@ package com.View;
 
 import com.Controller.LoginController;
 import com.Controller.LotTableController;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
  * Created by MazurJestBoski on 2016-05-13.
  */
 public class MenuView {
-    public void start() {
+
+    public void start(String loggedUser) {
         LotTableController lotTableController = new LotTableController();
-        LoginController loginController = new LoginController();
-        String loggedUser = loginController.loggedUser;
-
         Stage stage= new Stage();
-        BorderPane borderPane = new BorderPane();
 
-        lotTableController.tableView = new TableView();
-        lotTableController.createTable(loggedUser);
-        ScrollPane scrollPane = new ScrollPane(lotTableController.tableView);
+        ///CREATING LABELS FOR FULL LOT VIEW
+        Label emptyLabel = new Label(" ");
+        Label emptyLabel2 = new Label(" ");
+        Label lotNumber = new Label("Lot Number: ");
+        lotNumber.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label realEstateRegister = new Label("Real Estate Register: ");
+        realEstateRegister.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label area = new Label("Area: ");
+        area.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label geodeticRegion = new Label("Geodetic Region: ");
+        geodeticRegion.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label identificationNumber = new Label("Identification Number: ");
+        identificationNumber.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label typeLot = new Label("Lot Type: ");
+        typeLot.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label address = new Label("Address: ");
+        address.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label cadastralUnit = new Label("Cadastral Unit: ");
+        cadastralUnit.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Label description = new Label("Description: ");
+        description.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        //////////////////////////////////////////////////////////////
+        ////CREATING TEXTFIELDS FOR FULL LOT VIEW////
+        TextField lotNumberT = new TextField();
+        TextField realEstateRegisterT = new TextField();
+        TextField areaT = new TextField();
+        TextField geodeticRegionT = new TextField();
+        TextField identificationNumberT = new TextField();
+        TextField typeLotT = new TextField();
+        TextField addressT = new TextField();
+        TextField cadastralUnitT = new TextField();
+        TextField descriptionT = new TextField();
 
-        Scene scene = new Scene(borderPane, 700, 700);
+
+        ////////////GRIDPANE ITEM PLACING///////////////
+        GridPane lotManageGridPane = new GridPane(); /// gridPane for lotViewing/adding/editing
+        lotManageGridPane.setGridLinesVisible(true);
+        lotManageGridPane.setVgap(22);
+        lotManageGridPane.setHgap(10);
+        lotManageGridPane.addColumn(0, emptyLabel, lotNumber, realEstateRegister, area, geodeticRegion,
+                identificationNumber, typeLot, address, cadastralUnit, description);
+        lotManageGridPane.addColumn(1, emptyLabel2, lotNumberT, realEstateRegisterT, areaT, geodeticRegionT,
+                identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT);
+        ////////////////////////////////////////////////
+
+
+
+        //////////////////////////////////////TableWindow////////////////////////////////////////////////
+        final Label labelLot = new Label("Your lots");
+        labelLot.setFont(new Font("Arial", 20));
+
+        Button buttonMain1 = new Button("Add");
+        Button buttonMain2 = new Button("Edit");
+        Button buttonMain3 = new Button("Delete");
         Button exit = new Button("Exit");
 
-        borderPane.setLeft(scrollPane);
-        borderPane.setBottom(exit);
-        stage.setScene(scene);
+        BorderPane borderPane1 = new BorderPane();
+        Scene scene1 = new Scene(borderPane1, 700, 700);
+        lotTableController.tableView = new TableView();
+        lotTableController.createTable(loggedUser);
+
+        Button compareButton = new Button("Compare");
+        VBox tableVbox = new VBox();
+        Button searchButton = new Button("Search");
+        TextField searchfield = new TextField();
+        HBox hBox2 = new HBox(5);
+        hBox2.getChildren().addAll(searchfield, searchButton);
+
+        ScrollPane scrollPane = new ScrollPane(lotTableController.tableView);
+        HBox hBox1 = new HBox(5);
+        hBox1.getChildren().addAll(buttonMain1, buttonMain2, buttonMain3, compareButton);
+        tableVbox.setSpacing(5);
+        tableVbox.setPadding(new Insets(10, 0, 0, 10));
+        tableVbox.getChildren().addAll(labelLot, scrollPane, hBox1, hBox2);
+        borderPane1.setLeft(tableVbox);
+        borderPane1.setCenter(lotManageGridPane);
+        borderPane1.setBottom(exit);
+        borderPane1.setId("backgroundImage");
+
+        scene1.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
+
+
+
+        stage.setScene(scene1);
         stage.show();
 
     }

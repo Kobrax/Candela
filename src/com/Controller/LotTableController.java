@@ -21,7 +21,7 @@ public class LotTableController {
 
     public static ObservableList<ObservableList> data;
     public TableView tableView;
-    private  Connection conn;
+    private static Connection conn = LoginModel.conn;
 
     public void createTable(String loggedUs) {
         data = FXCollections.observableArrayList();
@@ -34,7 +34,7 @@ public class LotTableController {
 
             String sql = "SELECT lotNumber, realEstateRegister, area FROM lot WHERE username = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, loggedUs);
+             preparedStatement.setString(1, loggedUs);
 
             ResultSet result = preparedStatement.executeQuery();
 
@@ -83,7 +83,10 @@ public class LotTableController {
 
     public void resetTable()
     {
+        if(data!=null){
         data.removeAll(data);
-        tableView.getColumns().clear();
+        tableView.getColumns().clear();}
+        else
+            System.out.println("tableview empty, cannot clear");
     }
 }
