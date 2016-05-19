@@ -8,9 +8,7 @@ import com.Model.LoginModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -28,6 +26,7 @@ public class LoginView {
         final LoginController loginController = new LoginController();
         final ViewController viewController = new ViewController();
         final LotTableController lotTableController = new LotTableController();
+        String loggedUser = loginController.loggedUser;
 
 
         //creating scene
@@ -96,16 +95,16 @@ public class LoginView {
         //locating the text fields and labels
 
         exitAndRegister.getChildren().addAll(exit, register);
-        exitAndRegister.setPadding(new Insets(10,5,5,10));
+        exitAndRegister.setPadding(new Insets(10, 5, 5, 10));
         exitAndRegister.setSpacing(5);
         GridPane.setConstraints(scenetitle, 0, 0);
         GridPane.setConstraints(errorLabel, 0, 1);
         GridPane.setConstraints(user, 0, 2);
         GridPane.setConstraints(userField, 1, 2);
         GridPane.setConstraints(password,0,3);
-        GridPane.setConstraints(passwordText,1,3);
-        GridPane.setConstraints(logIn,1,4);
-        GridPane.setConstraints(register, 1,5);
+        GridPane.setConstraints(passwordText, 1, 3);
+        GridPane.setConstraints(logIn, 1, 4);
+        GridPane.setConstraints(register, 1, 5);
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -115,15 +114,27 @@ public class LoginView {
         primaryStage.setResizable(true);
         primaryStage.show();
 
+
+
+        BorderPane borderPane1 = new BorderPane();
+        Scene scene1 = new Scene(borderPane1, 700,700);
+        lotTableController.tableView = new TableView();
+        lotTableController.createTable(loggedUser);
+        ScrollPane scrollPane = new ScrollPane(lotTableController.tableView);
+        borderPane1.setLeft(scrollPane);
+
+
         logIn.setOnAction(event ->
         {
             String userSField = userField.getText();
             String passwordField = passwordText.getText();
             if (loginController.logIn(userSField, passwordField)) {
                 if (loginController.ladmin == 0) {
+                    lotTableController.resetTable();
                     lotTableController.createTable(userSField);
-                    viewController.startMenu();
-                    primaryStage.close();
+                    //viewController.startMenu();
+                    //primaryStage.close();
+                    primaryStage.setScene(scene1);
                 } else {
                     errorLabel.setText("Wrong User Name or Password, try again.");
                 }
@@ -139,6 +150,7 @@ public class LoginView {
         exit.setOnAction(event -> {
             primaryStage.close();
         });
+
 
     }
 
