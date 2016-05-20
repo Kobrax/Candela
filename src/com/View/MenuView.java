@@ -30,7 +30,7 @@ public class MenuView {
 
         ///CREATING LABELS FOR FULL LOT VIEW
         Label emptyLabel = new Label("");
-        Label emptyLabel2 = new Label("Edit");
+        Label emptyLabel2 = new Label("Candela");
         emptyLabel2.setFont(new Font("Arial", 20));
         Label lotNumber = new Label("Lot Number: ");
         lotNumber.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -65,7 +65,7 @@ public class MenuView {
 
         ////////////GRIDPANE ITEM PLACING///////////////
         GridPane lotManageGridPane = new GridPane(); /// gridPane for lotViewing/adding/editing
-        lotManageGridPane.setVgap(22);
+        lotManageGridPane.setVgap(18);
         lotManageGridPane.setHgap(10);
         lotManageGridPane.addColumn(0, emptyLabel, lotNumber, realEstateRegister, area, geodeticRegion,
                 identificationNumber, typeLot, address, cadastralUnit, description);
@@ -87,7 +87,7 @@ public class MenuView {
         Button exit = new Button("Exit");
 
         BorderPane borderPane1 = new BorderPane();
-        Scene scene1 = new Scene(borderPane1, 700, 700);
+        Scene scene1 = new Scene(borderPane1, 750, 600);
         lotTableController.tableView = new TableView();
         lotTableController.createTable(loggedUser);
 
@@ -102,7 +102,7 @@ public class MenuView {
         HBox hBox1 = new HBox(5);
         hBox1.getChildren().addAll(buttonMain1, buttonMain2, buttonMain3, compareButton);
         tableVbox.setSpacing(5);
-        tableVbox.setPadding(new Insets(10, 0, 0, 10));
+        tableVbox.setPadding(new Insets(10, 10, 10, 10));
         tableVbox.getChildren().addAll(labelLot, scrollPane, hBox1, hBox2);
         HBox hBox = new HBox();
         hBox.getChildren().addAll(tableVbox, lotManageGridPane);
@@ -117,10 +117,10 @@ public class MenuView {
 
         ////////displaying lot info in textFields//////////
 
-        lotTableController.tableView.setRowFactory(tableView ->{
+        lotTableController.tableView.setRowFactory(tableView -> {
             TableRow<ObservableList> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if(event.getClickCount() ==1 && (!row.isEmpty())){
+                if (event.getClickCount() == 1 && (!row.isEmpty())) {
                     ObservableList<String> getData = row.getItem();
                     String lotN = getData.get(1);
                     lotNumberT.setText(displayLotController.lotInfo(lotN).get(0).toString());
@@ -134,7 +134,6 @@ public class MenuView {
                     descriptionT.setText(displayLotController.lotInfo(lotN).get(8).toString());
 
 
-
                 }
             });
             return row;
@@ -143,9 +142,40 @@ public class MenuView {
         ////////////////////////////////////////////////////////////////////
 
 
+        buttonMain1.setOnAction(event1 ->
+        {
+            emptyLabel2.setText("NEW");
+        });
+
+        saveButton.setOnAction(event ->
+        {
+            if (emptyLabel2.getText().equals("NEW")) {
+                displayLotController.saveToDB(lotNumberT.getText(), realEstateRegisterT.getText(),
+                        Double.parseDouble(areaT.getText()), geodeticRegionT.getText(),identificationNumberT.getText(),
+                        typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loggedUser);
+
+                lotTableController.data.removeAll(lotTableController.data);
+                lotTableController.tableView.getColumns().clear();
+                lotTableController.createTable(loggedUser);
+
+                lotNumberT.clear();
+                realEstateRegisterT.clear();
+                areaT.clear();
+                geodeticRegionT.clear();
+                identificationNumberT.clear();
+                typeLotT.clear();
+                addressT.clear();
+                cadastralUnitT.clear();
+                descriptionT.clear();
+
+            } else System.out.println("Ups, something go wrong " + loggedUser);
+
+        });
 
         stage.setScene(scene1);
         stage.show();
 
+
     }
+
 }
