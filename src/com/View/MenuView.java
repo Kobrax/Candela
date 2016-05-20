@@ -23,10 +23,12 @@ public class MenuView {
     public void start(String loggedUser) {
         LotTableController lotTableController = new LotTableController();
         Stage stage= new Stage();
+        Button saveButton = new Button("Save");
 
         ///CREATING LABELS FOR FULL LOT VIEW
-        Label emptyLabel = new Label(" ");
-        Label emptyLabel2 = new Label(" ");
+        Label emptyLabel = new Label("");
+        Label emptyLabel2 = new Label("Edit");
+        emptyLabel2.setFont(new Font("Arial", 20));
         Label lotNumber = new Label("Lot Number: ");
         lotNumber.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         Label realEstateRegister = new Label("Real Estate Register: ");
@@ -60,13 +62,12 @@ public class MenuView {
 
         ////////////GRIDPANE ITEM PLACING///////////////
         GridPane lotManageGridPane = new GridPane(); /// gridPane for lotViewing/adding/editing
-        lotManageGridPane.setGridLinesVisible(true);
         lotManageGridPane.setVgap(22);
         lotManageGridPane.setHgap(10);
         lotManageGridPane.addColumn(0, emptyLabel, lotNumber, realEstateRegister, area, geodeticRegion,
                 identificationNumber, typeLot, address, cadastralUnit, description);
         lotManageGridPane.addColumn(1, emptyLabel2, lotNumberT, realEstateRegisterT, areaT, geodeticRegionT,
-                identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT);
+                identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT, saveButton);
         ////////////////////////////////////////////////
 
 
@@ -98,9 +99,12 @@ public class MenuView {
         tableVbox.setSpacing(5);
         tableVbox.setPadding(new Insets(10, 0, 0, 10));
         tableVbox.getChildren().addAll(labelLot, scrollPane, hBox1, hBox2);
-        borderPane1.setLeft(tableVbox);
-        borderPane1.setCenter(lotManageGridPane);
+        HBox hBox = new HBox();
+        hBox.getChildren().addAll(tableVbox, lotManageGridPane);
+        borderPane1.setLeft(hBox);
+        hBox.setSpacing(10);
         borderPane1.setBottom(exit);
+        borderPane1.setPadding(new Insets(10, 10, 10, 10));
         borderPane1.setId("backgroundImage");
 
         scene1.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
