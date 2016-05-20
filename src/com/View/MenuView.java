@@ -73,26 +73,6 @@ public class MenuView {
                 identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT, saveButton);
         ////////////////////////////////////////////////
 
-        ////////displaying lot info in textFields//////////
-
-        lotTableController.tableView.setRowFactory(tableView ->{
-            TableRow<ObservableList> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if(event.getClickCount() ==1 && (!row.isEmpty())){
-                    ObservableList<String> getData = row.getItem();
-                    String lotN = getData.get(1);
-                    System.out.println(displayLotController.lotInfo(lotN));
-                    //lotNumberT.setText(displayLotController.lotInfo(lotN).get(0).toString());
-                }
-            });
-            return row;
-        });
-
-
-
-
-
-
 
 
 
@@ -134,6 +114,33 @@ public class MenuView {
 
         scene1.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
+
+        ////////displaying lot info in textFields//////////
+
+        lotTableController.tableView.setRowFactory(tableView ->{
+            TableRow<ObservableList> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() ==1 && (!row.isEmpty())){
+                    ObservableList<String> getData = row.getItem();
+                    String lotN = getData.get(1);
+                    lotNumberT.setText(displayLotController.lotInfo(lotN).get(0).toString());
+                    realEstateRegisterT.setText(displayLotController.lotInfo(lotN).get(1).toString());
+                    areaT.setText(displayLotController.lotInfo(lotN).get(2).toString());
+                    geodeticRegionT.setText(displayLotController.lotInfo(lotN).get(3).toString());
+                    identificationNumberT.setText(displayLotController.lotInfo(lotN).get(4).toString());
+                    typeLotT.setText(displayLotController.lotInfo(lotN).get(5).toString());
+                    addressT.setText(displayLotController.lotInfo(lotN).get(6).toString());
+                    cadastralUnitT.setText(displayLotController.lotInfo(lotN).get(7).toString());
+                    descriptionT.setText(displayLotController.lotInfo(lotN).get(8).toString());
+
+
+
+                }
+            });
+            return row;
+        });
+
+        ////////////////////////////////////////////////////////////////////
 
 
 

@@ -18,7 +18,7 @@ public class DisplayLot {
         ArrayList<String> lotInfos = new ArrayList<>();
 
         String sql = "SELECT lotNumber, realEstateRegister, area, geodeticRegion," +
-                " identificationNumber, typeLot, adress, cadastralUnit, description FROM lot WHERE lotNumber = ?";
+                " identificationNumber, typeLot, adress, cadastralUnit, description FROM lot WHERE realEstateRegister = ?";
 
         try
         {
@@ -30,7 +30,7 @@ public class DisplayLot {
 
             if (result.next()) {
                 for(int i = 1 ; i<10; i++) {
-                    String x =result.getString(i);
+                    String x = result.getString(i);
                     lotInfos.add(x);
                 }
             }
