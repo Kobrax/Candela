@@ -1,7 +1,9 @@
 package com.View;
 
+import com.Controller.DisplayLotController;
 import com.Controller.LoginController;
 import com.Controller.LotTableController;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +24,7 @@ public class MenuView {
 
     public void start(String loggedUser) {
         LotTableController lotTableController = new LotTableController();
+        DisplayLotController displayLotController = new DisplayLotController();
         Stage stage= new Stage();
         Button saveButton = new Button("Save");
 
@@ -69,6 +72,28 @@ public class MenuView {
         lotManageGridPane.addColumn(1, emptyLabel2, lotNumberT, realEstateRegisterT, areaT, geodeticRegionT,
                 identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT, saveButton);
         ////////////////////////////////////////////////
+
+        ////////displaying lot info in textFields//////////
+
+        lotTableController.tableView.setRowFactory(tableView ->{
+            TableRow<ObservableList> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() ==1 && (!row.isEmpty())){
+                    ObservableList<String> getData = row.getItem();
+                    String lotN = getData.get(1);
+                    System.out.println(displayLotController.lotInfo(lotN));
+                    //lotNumberT.setText(displayLotController.lotInfo(lotN).get(0).toString());
+                }
+            });
+            return row;
+        });
+
+
+
+
+
+
+
 
 
 
