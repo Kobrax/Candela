@@ -3,6 +3,7 @@ package com.View;
 import com.Controller.DisplayLotController;
 import com.Controller.LoginController;
 import com.Controller.LotTableController;
+import com.Controller.ViewController;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -25,8 +26,19 @@ public class MenuView {
     public void start(String loggedUser) {
         LotTableController lotTableController = new LotTableController();
         DisplayLotController displayLotController = new DisplayLotController();
+        ViewController viewController = new ViewController();
+
         Stage stage= new Stage();
         Button saveButton = new Button("Save");
+        Button clearButton = new Button("Clear");
+        HBox hBox = new HBox(5);
+
+        Button add = new Button("Add");
+        Button edit = new Button("Edit");
+        Button delete = new Button("Delete");
+        Button logOutButton = new Button("Log out");
+        final String[] loginUser = {loggedUser};
+
 
         ///CREATING LABELS FOR FULL LOT VIEW
         Label emptyLabel = new Label("");
@@ -62,7 +74,7 @@ public class MenuView {
         TextField cadastralUnitT = new TextField();
         TextField descriptionT = new TextField();
 
-
+        hBox.getChildren().addAll(saveButton,clearButton);
         ////////////GRIDPANE ITEM PLACING///////////////
         GridPane lotManageGridPane = new GridPane(); /// gridPane for lotViewing/adding/editing
         lotManageGridPane.setVgap(18);
@@ -70,7 +82,7 @@ public class MenuView {
         lotManageGridPane.addColumn(0, emptyLabel, lotNumber, realEstateRegister, area, geodeticRegion,
                 identificationNumber, typeLot, address, cadastralUnit, description);
         lotManageGridPane.addColumn(1, emptyLabel2, lotNumberT, realEstateRegisterT, areaT, geodeticRegionT,
-                identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT, saveButton);
+                identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT, hBox);
         ////////////////////////////////////////////////
 
 
@@ -81,15 +93,11 @@ public class MenuView {
         final Label labelLot = new Label("Your lots");
         labelLot.setFont(new Font("Arial", 20));
 
-        Button buttonMain1 = new Button("Add");
-        Button buttonMain2 = new Button("Edit");
-        Button buttonMain3 = new Button("Delete");
-        Button exit = new Button("Exit");
 
         BorderPane borderPane1 = new BorderPane();
         Scene scene1 = new Scene(borderPane1, 750, 600);
         lotTableController.tableView = new TableView();
-        lotTableController.createTable(loggedUser);
+        lotTableController.createTable(loginUser[0]);
 
         Button compareButton = new Button("Compare");
         VBox tableVbox = new VBox();
@@ -100,15 +108,15 @@ public class MenuView {
 
         ScrollPane scrollPane = new ScrollPane(lotTableController.tableView);
         HBox hBox1 = new HBox(5);
-        hBox1.getChildren().addAll(buttonMain1, buttonMain2, buttonMain3, compareButton);
+        hBox1.getChildren().addAll(add, edit, delete, compareButton);
         tableVbox.setSpacing(5);
         tableVbox.setPadding(new Insets(10, 10, 10, 10));
         tableVbox.getChildren().addAll(labelLot, scrollPane, hBox1, hBox2);
-        HBox hBox = new HBox();
-        hBox.getChildren().addAll(tableVbox, lotManageGridPane);
-        borderPane1.setLeft(hBox);
-        hBox.setSpacing(10);
-        borderPane1.setBottom(exit);
+        HBox tableHbox = new HBox();
+        tableHbox.getChildren().addAll(tableVbox, lotManageGridPane);
+        borderPane1.setLeft(tableHbox);
+        tableHbox.setSpacing(10);
+        borderPane1.setBottom(logOutButton);
         borderPane1.setPadding(new Insets(10, 10, 10, 10));
         borderPane1.setId("backgroundImage");
 
@@ -142,21 +150,21 @@ public class MenuView {
         ////////////////////////////////////////////////////////////////////
 
 
-        buttonMain1.setOnAction(event1 ->
+        add.setOnAction(event1 ->
         {
-            emptyLabel2.setText("NEW");
+            emptyLabel2.setText("New");
         });
 
         saveButton.setOnAction(event ->
         {
-            if (emptyLabel2.getText().equals("NEW")) {
+            if (emptyLabel2.getText().equals("New")) {
                 displayLotController.saveToDB(lotNumberT.getText(), realEstateRegisterT.getText(),
-                        Double.parseDouble(areaT.getText()), geodeticRegionT.getText(),identificationNumberT.getText(),
-                        typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loggedUser);
+                        Double.parseDouble(areaT.getText()), geodeticRegionT.getText(), identificationNumberT.getText(),
+                        typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loginUser[0]);
 
                 lotTableController.data.removeAll(lotTableController.data);
                 lotTableController.tableView.getColumns().clear();
-                lotTableController.createTable(loggedUser);
+                lotTableController.createTable(loginUser[0]);
 
                 lotNumberT.clear();
                 realEstateRegisterT.clear();
@@ -168,7 +176,42 @@ public class MenuView {
                 cadastralUnitT.clear();
                 descriptionT.clear();
 
-            } else System.out.println("Ups, something go wrong " + loggedUser);
+            } else System.out.println("Ups, something go wrong " + loginUser[0]);
+
+        });
+
+        delete.setOnAction(event -> {
+            int rowIndex = lotTableController.tableView.getSelectionModel().getSelectedIndex();
+            ObservableList rowList = (ObservableList) lotTableController.tableView.getItems().get(rowIndex);
+            int columnIndex = 0;
+            int value = Integer.parseInt(rowList.get(columnIndex).toString());
+
+            displayLotController.deleteFromDB("lot", value);
+
+            lotTableController.data.removeAll(lotTableController.data);
+            lotTableController.tableView.getColumns().clear();
+            lotTableController.createTable(loginUser[0]);
+        });
+
+        clearButton.setOnAction(event ->
+        {
+            lotNumberT.clear();
+            realEstateRegisterT.clear();
+            areaT.clear();
+            geodeticRegionT.clear();
+            identificationNumberT.clear();
+            typeLotT.clear();
+            addressT.clear();
+            cadastralUnitT.clear();
+            descriptionT.clear();
+        });
+
+
+        logOutButton.setOnAction(event ->
+        {
+            viewController.startLogin();
+            loginUser[0] = null;
+            stage.close();
 
         });
 

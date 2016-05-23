@@ -24,6 +24,11 @@ public class DisplayLotController {
                          String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser){
         displayLot.writeToDB(lotNumber, realEstateRegister, area, geodeticRegion, identificationNumber, typeOfLot, adress, cadastralUnit, description, loggedUser);
     }
+
+    public void deleteFromDB(String table, int ID)
+    {
+        displayLot.deleteFromDB(table, ID);
+    }
 }
 
 

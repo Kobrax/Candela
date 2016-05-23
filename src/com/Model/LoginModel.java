@@ -8,7 +8,7 @@ import java.sql.*;
 public class LoginModel {
     public static Connection conn = null;
     public String loggedUser = null;
-    boolean logged = false;
+    public boolean logged = false;
     public int lAdmin;
 
     public void connectToDB(){

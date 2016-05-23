@@ -18,7 +18,7 @@ public class DisplayLot {
         ArrayList<String> lotInfos = new ArrayList<>();
 
         String sql = "SELECT lotNumber, realEstateRegister, area, geodeticRegion," +
-                " identificationNumber, typeLot, adress, cadastralUnit, description FROM lot WHERE realEstateRegister = ?";
+                " identificationNumber, typeLot, adress, cadastralUnit, description FROM lot WHERE lotNumber = ?";
 
         try
         {
@@ -67,6 +67,23 @@ public class DisplayLot {
             int numberOfRows= preparedStatement.executeUpdate();
 
             System.out.println("Completed insert. Number of rows affected:" + numberOfRows);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void deleteFromDB(String table, int id)
+    {
+        String sql="DELETE FROM lot WHERE lotID = ?";
+        try
+        {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            int numberOfRows= preparedStatement.executeUpdate();
+            System.out.println("Completed delete. Number of rows affected:"+numberOfRows);
         } catch (SQLException e)
         {
             e.printStackTrace();

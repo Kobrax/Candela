@@ -32,7 +32,7 @@ public class LotTableController {
             String PASS = "ira72lBrrp";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            String sql = "SELECT lotNumber, realEstateRegister, area FROM lot WHERE username = ?";
+            String sql = "SELECT lotID, lotNumber, realEstateRegister, area FROM lot WHERE username = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
              preparedStatement.setString(1, loggedUs);
 
