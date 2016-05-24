@@ -23,6 +23,18 @@ import javafx.stage.Stage;
  */
 public class MenuView {
 
+    ////CREATING TEXTFIELDS FOR FULL LOT VIEW////
+    TextField lotNumberT = new TextField();
+    TextField realEstateRegisterT = new TextField();
+    TextField areaT = new TextField();
+    TextField geodeticRegionT = new TextField();
+    TextField identificationNumberT = new TextField();
+    TextField typeLotT = new TextField();
+    TextField addressT = new TextField();
+    TextField cadastralUnitT = new TextField();
+    TextField descriptionT = new TextField();
+
+
     public void start(String loggedUser) {
         LotTableController lotTableController = new LotTableController();
         DisplayLotController displayLotController = new DisplayLotController();
@@ -63,16 +75,6 @@ public class MenuView {
         Label description = new Label("Description: ");
         description.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         //////////////////////////////////////////////////////////////
-        ////CREATING TEXTFIELDS FOR FULL LOT VIEW////
-        TextField lotNumberT = new TextField();
-        TextField realEstateRegisterT = new TextField();
-        TextField areaT = new TextField();
-        TextField geodeticRegionT = new TextField();
-        TextField identificationNumberT = new TextField();
-        TextField typeLotT = new TextField();
-        TextField addressT = new TextField();
-        TextField cadastralUnitT = new TextField();
-        TextField descriptionT = new TextField();
 
         hBox.getChildren().addAll(saveButton,clearButton);
         ////////////GRIDPANE ITEM PLACING///////////////
@@ -166,15 +168,19 @@ public class MenuView {
                 lotTableController.tableView.getColumns().clear();
                 lotTableController.createTable(loginUser[0]);
 
-                lotNumberT.clear();
-                realEstateRegisterT.clear();
-                areaT.clear();
-                geodeticRegionT.clear();
-                identificationNumberT.clear();
-                typeLotT.clear();
-                addressT.clear();
-                cadastralUnitT.clear();
-                descriptionT.clear();
+                clear();
+
+            } else if (emptyLabel2.getText().equals("Edit")) {
+                int rowIndex = lotTableController.tableView.getSelectionModel().getSelectedIndex();
+                ObservableList rowList = (ObservableList) lotTableController.tableView.getItems().get(rowIndex);
+                int columnIndex = 0;
+                int value = Integer.parseInt(rowList.get(columnIndex).toString());
+
+                displayLotController.updateDB(lotNumberT.getText(), realEstateRegisterT.getText(),
+                        Double.parseDouble(areaT.getText()), geodeticRegionT.getText(), identificationNumberT.getText(),
+                        typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loginUser[0], value);
+
+                clear();
 
             } else System.out.println("Ups, something go wrong " + loginUser[0]);
 
@@ -195,15 +201,7 @@ public class MenuView {
 
         clearButton.setOnAction(event ->
         {
-            lotNumberT.clear();
-            realEstateRegisterT.clear();
-            areaT.clear();
-            geodeticRegionT.clear();
-            identificationNumberT.clear();
-            typeLotT.clear();
-            addressT.clear();
-            cadastralUnitT.clear();
-            descriptionT.clear();
+            clear();
         });
 
 
@@ -215,10 +213,27 @@ public class MenuView {
 
         });
 
+        edit.setOnAction(event ->
+        {
+            emptyLabel2.setText("Edit");
+        });
+
         stage.setScene(scene1);
         stage.show();
 
 
     }
 
+    public void clear()
+    {
+        lotNumberT.clear();
+        realEstateRegisterT.clear();
+        areaT.clear();
+        geodeticRegionT.clear();
+        identificationNumberT.clear();
+        typeLotT.clear();
+        addressT.clear();
+        cadastralUnitT.clear();
+        descriptionT.clear();
+    }
 }

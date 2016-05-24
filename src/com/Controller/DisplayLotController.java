@@ -29,6 +29,13 @@ public class DisplayLotController {
     {
         displayLot.deleteFromDB(table, ID);
     }
+
+    public void updateDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,
+                         String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser, int lotID)
+    {
+        displayLot.updateInDB(lotNumber, realEstateRegister, area, geodeticRegion, identificationNumber, typeOfLot, adress, cadastralUnit, description, loggedUser, lotID);
+    }
+
 }
 
 
