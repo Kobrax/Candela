@@ -21,10 +21,11 @@ public class LotTableController {
 
     public static ObservableList<ObservableList> data;
     public TableView tableView;
-    private static Connection conn = LoginModel.conn;
+    private static Connection conn;
 
-    public void createTable(String loggedUs) {
+    public void createTable(String loggedUs, String wildcard) {
         data = FXCollections.observableArrayList();
+        String enteredByUser = "%" + wildcard + "%";
         try {
 
             String DB_URL = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7119030";
@@ -32,14 +33,25 @@ public class LotTableController {
             String PASS = "ira72lBrrp";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            String sql = "SELECT lotID, lotNumber, realEstateRegister, area FROM lot WHERE username = ?";
+            String sql = "SELECT lotID, lotNumber, realEstateRegister, area FROM lot WHERE username = ? AND lotNumber like ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-             preparedStatement.setString(1, loggedUs);
+            preparedStatement.setString(1, loggedUs);
+            preparedStatement.setString(2, enteredByUser);
 
             ResultSet result = preparedStatement.executeQuery();
 
+            tableMethod(result);
 
-// create coulmn
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Database problem123");
+
+        }
+    }
+
+    public void tableMethod(ResultSet result){
+        try{
+            // create coulmn
             for (int i = 0; i < result.getMetaData().getColumnCount(); i++) {
 // dynamic table coulmns
                 final int j = i;
@@ -51,7 +63,6 @@ public class LotTableController {
                     }
                 });
 //Add comlumn to lot
-
                 tableView.getColumns().addAll(colLot);
             }
 
@@ -73,13 +84,11 @@ public class LotTableController {
 
             // Add  data TableView
             tableView.setItems(data);
-
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Database problem");
+            System.out.println("Database problemxyz");
 
-        }
-    }
+        }}
 
     public void resetTable()
     {
