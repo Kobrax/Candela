@@ -3,3 +3,8 @@
     -fx-background-image: url("pics/landscape-03.jpg");
     -fx-background-position: center center;
 }
+
+#image{
+    -fx-image: url("pics/Map_of_Poland.png");
+    -fx-image-position: bottom right;
+}
