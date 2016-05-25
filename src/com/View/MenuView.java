@@ -101,20 +101,7 @@ public class MenuView {
                 identificationNumber, typeLot, address, cadastralUnit, description);
         lotManageGridPane.addColumn(1, emptyLabel2, lotNumberT, realEstateRegisterT, areaT, geodeticRegionT,
                 identificationNumberT, typeLotT, addressT, cadastralUnitT, descriptionT, mapVBox);
-        ////////////////////////////////////////////////
 
-
-
-        logOutButton.setStyle("-fx-min-width: 130px;\n" +
-                "    -fx-max-width: 130px;\n" +
-                "    -fx-background-color:\n" +
-                "            #000000,\n" +
-                "            #984639;\n" +
-                "    -fx-background-insets: 0,1,2,3;\n" +
-                "    -fx-background-radius: 3,2,2,2;\n" +
-                "    -fx-padding: 12 30 12 30;\n" +
-                "    -fx-text-fill: white;\n" +
-                "    -fx-font-size: 12px;");
 
         //////////////////////////////////////TableWindow////////////////////////////////////////////////
         final Label labelLot = new Label("Your lots");
@@ -150,6 +137,55 @@ public class MenuView {
         borderPane1.setPadding(new Insets(10, 10, 10, 10));
         borderPane1.setId("backgroundImage");
 
+
+        //////////////////////////////////////////////////////////////////////////
+        logOutButton.setStyle("-fx-min-width: 130px;\n" +
+                "    -fx-max-width: 130px;\n" +
+                "    -fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-background-insets: 0,1,2,3;\n" +
+                "    -fx-background-radius: 3,2,2,2;\n" +
+                "    -fx-padding: 12 30 12 30;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-font-size: 12px;");
+
+        clearButton.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        compareButton.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        saveButton.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        searchButton.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        add.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        edit.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        delete.setStyle("-fx-background-color:\n" +
+                "            #000000,\n" +
+                "            #984639;\n" +
+                "    -fx-text-fill: white;\n");
+
+        /////////////////////////////////////////////////////////////////////////
 
 
         hyperlink.setOnAction(event2 -> {
