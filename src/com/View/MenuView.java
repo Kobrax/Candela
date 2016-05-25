@@ -5,6 +5,7 @@ import com.Controller.LotTableController;
 import com.Controller.ViewController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -78,7 +79,7 @@ public class MenuView {
         Label description = new Label("Description: ");
         description.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         //////////////////////////////////////////////////////////////
-<<<<<<< HEAD
+
         Image image = new Image(getClass().getResourceAsStream("pics/Map_of_Poland.png"));
         Hyperlink hyperlink = new Hyperlink();
         ImageView imageView = new ImageView(image);
@@ -91,10 +92,7 @@ public class MenuView {
         mapVBox.getChildren().addAll(hBox, hyperlink);
         mapVBox.setSpacing(30);
 
-=======
 
-        hBox.getChildren().addAll(saveButton,clearButton);
->>>>>>> origin/master
         ////////////GRIDPANE ITEM PLACING///////////////
         GridPane lotManageGridPane = new GridPane(); /// gridPane for lotViewing/adding/editing
         lotManageGridPane.setVgap(18);
@@ -214,11 +212,9 @@ public class MenuView {
 
                 lotTableController.data.removeAll(lotTableController.data);
                 lotTableController.tableView.getColumns().clear();
-<<<<<<< HEAD
-                lotTableController.createTable(loginUser[0]);
-=======
+
                 lotTableController.createTable(loginUser[0], "");
->>>>>>> origin/master
+
 
                 clear();
 
@@ -270,10 +266,7 @@ public class MenuView {
             emptyLabel2.setText("Edit");
         });
 
-<<<<<<< HEAD
         stage.setResizable(false);
-=======
->>>>>>> origin/master
         stage.setScene(scene1);
         stage.show();
 
