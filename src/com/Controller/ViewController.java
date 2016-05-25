@@ -1,5 +1,6 @@
 package com.Controller;
 
+import com.View.BrowserView;
 import com.View.LoginView;
 import com.View.MenuView;
 import com.View.RegisterView;
@@ -23,5 +24,10 @@ public class ViewController {
     public void startLogin(){
         LoginView loginView = new LoginView();
         loginView.start();
+    }
+    public void browser()
+    {
+        BrowserView browserView = new BrowserView();
+        browserView.start();
     }
 }
