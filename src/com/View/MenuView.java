@@ -43,16 +43,18 @@ public class MenuView {
         ViewController viewController = new ViewController();
 
         Stage stage= new Stage();
-        Button saveButton = new Button("Save");
-        Button clearButton = new Button("Clear");
         HBox hBox = new HBox(5);
         VBox mapVBox = new VBox(10);
         VBox logOutVbox = new VBox();
 
+        Button saveButton = new Button("Save");
+        Button clearButton = new Button("Clear");
         Button add = new Button("Add");
         Button edit = new Button("Edit");
         Button delete = new Button("Delete");
         Button logOutButton = new Button("Log out");
+        Button editUser = new Button("Edit account");
+
         final String[] loginUser = {loggedUser};
 
 
@@ -136,6 +138,9 @@ public class MenuView {
         tableHbox.setSpacing(10);
         borderPane1.setPadding(new Insets(10, 10, 10, 10));
         borderPane1.setId("backgroundImage");
+
+        borderPane1.setTop(editUser);
+        borderPane1.setAlignment(editUser, Pos.TOP_RIGHT);
 
 
         //////////////////////////////////////////////////////////////////////////
@@ -306,6 +311,11 @@ public class MenuView {
         stage.setScene(scene1);
         stage.show();
 
+
+        editUser.setOnAction(event ->
+        {
+            viewController.editUser(loggedUser);
+        });
 
     }
 

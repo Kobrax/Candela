@@ -1,9 +1,6 @@
 package com.Controller;
 
-import com.View.BrowserView;
-import com.View.LoginView;
-import com.View.MenuView;
-import com.View.RegisterView;
+import com.View.*;
 
 /**
  * Created by Dom on 2016-05-17.
@@ -29,5 +26,11 @@ public class ViewController {
     {
         BrowserView browserView = new BrowserView();
         browserView.start();
+    }
+
+    public void editUser(String loggedUser)
+    {
+        EditView editView = new EditView();
+        editView.start(loggedUser);
     }
 }

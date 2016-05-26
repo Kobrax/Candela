@@ -3,7 +3,7 @@ package com.Model;
 import java.sql.*;
 
 /**
- * Created by MazurJestBoski on 2016-05-13.
+ * Created by Dom on 2016-05-13.
  */
 public class LoginModel {
     public static Connection conn = null;
