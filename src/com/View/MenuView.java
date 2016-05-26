@@ -244,6 +244,12 @@ public class MenuView {
             emptyLabel2.setText("New");
         });
 
+
+        compareButton.setOnAction(event1 ->
+        {
+            viewController.startCompare(loggedUser);
+        });
+
         saveButton.setOnAction(event ->
         {
             if (emptyLabel2.getText().equals("New")) {

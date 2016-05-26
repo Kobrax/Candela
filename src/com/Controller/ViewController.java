@@ -33,4 +33,10 @@ public class ViewController {
         EditView editView = new EditView();
         editView.start(loggedUser);
     }
+
+    public void startCompare(String loggedUser)
+    {
+        CompareView compareView = new CompareView();
+        compareView.start(loggedUser);
+    }
 }
