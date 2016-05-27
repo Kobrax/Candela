@@ -10,8 +10,7 @@ import javafx.stage.Stage;
  * Created by Dom on 2016-05-25.
  */
 public class BrowserView {
-    public void start()
-    {
+    public void start() {
         Stage browserStage = new Stage();
         WebView view = new WebView();
         Scene scene = new Scene(view, 900, 900);

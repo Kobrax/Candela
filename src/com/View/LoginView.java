@@ -23,8 +23,9 @@ import javafx.stage.Stage;
 public class LoginView {
 
 
-String loggedUser;
-    public void start(){
+    String loggedUser;
+
+    public void start() {
         final LoginController loginController = new LoginController();
         final ViewController viewController = new ViewController();
         MenuView menuView = new MenuView();
@@ -45,7 +46,7 @@ String loggedUser;
         gridPane.setVgap(20);
         gridPane.setHgap(-80);
 
-        Scene scene = new Scene(borderPane,650,540);
+        Scene scene = new Scene(borderPane, 650, 540);
         primaryStage.setScene(scene);
 
 
@@ -103,7 +104,7 @@ String loggedUser;
         GridPane.setConstraints(errorLabel, 0, 1);
         GridPane.setConstraints(user, 0, 2);
         GridPane.setConstraints(userField, 1, 2);
-        GridPane.setConstraints(password,0,3);
+        GridPane.setConstraints(password, 0, 3);
         GridPane.setConstraints(passwordText, 1, 3);
         GridPane.setConstraints(logIn, 1, 4);
         GridPane.setConstraints(register, 1, 5);
@@ -115,7 +116,6 @@ String loggedUser;
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.show();
-
 
 
         logIn.setOnAction(event ->
@@ -145,5 +145,5 @@ String loggedUser;
 
     }
 
-    }
+}
 

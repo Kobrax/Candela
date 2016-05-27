@@ -25,8 +25,7 @@ public class RegisterView {
     ViewController viewController = new ViewController();
     private RegisterController registerController = new RegisterController();
 
-    public void start()
-    {
+    public void start() {
         Stage stage = new Stage();
         GridPane gridPane = new GridPane();
         BorderPane borderPane = new BorderPane();
@@ -40,9 +39,8 @@ public class RegisterView {
         gridPane.setVgap(20);
         gridPane.setHgap(-80);
 
-        Scene scene = new Scene(borderPane, 700,700);
+        Scene scene = new Scene(borderPane, 700, 700);
         stage.setScene(scene);
-
 
 
         Label errorLabel = new Label("");//////////////////BY ADAM/////////////////
@@ -107,19 +105,19 @@ public class RegisterView {
         GridPane.setConstraints(errorLabel, 0, 1);
         GridPane.setConstraints(userLabel, 0, 2);
         GridPane.setConstraints(userField, 1, 2);
-        GridPane.setConstraints(passwordLabel,0,3);
-        GridPane.setConstraints(passwordText,1,3);
+        GridPane.setConstraints(passwordLabel, 0, 3);
+        GridPane.setConstraints(passwordText, 1, 3);
         GridPane.setConstraints(nameLabel, 0, 4);
         GridPane.setConstraints(nameField, 1, 4);
         GridPane.setConstraints(surnameLabel, 0, 5);
-        GridPane.setConstraints(surnameField, 1,5);
+        GridPane.setConstraints(surnameField, 1, 5);
         GridPane.setConstraints(lAreaLabel, 0, 6);
         GridPane.setConstraints(lAreaField, 1, 6);
         GridPane.setConstraints(emailLabel, 0, 7);
         GridPane.setConstraints(emailField, 1, 7);
 
 
-        GridPane.setConstraints(register, 1,8);
+        GridPane.setConstraints(register, 1, 8);
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -139,10 +137,10 @@ public class RegisterView {
             registerController.registerUser(userName, password, email, area, name, surname);
             viewController.startLogin();
             stage.close();
-                });
+        });
 
         exit.setOnAction(event -> {
-        viewController.startLogin();
+            viewController.startLogin();
             stage.close();
         });
     }

@@ -11,17 +11,16 @@ import java.util.ArrayList;
  */
 public class DisplayLot {
 
-    private static Connection conn = LoginModel.conn;
+    private static Connection conn = LoginModel.conn;  //fetching the running connection from LoginModel
 
 
-    public ArrayList fullLotInfo(String lotNumber){
+    public ArrayList fullLotInfo(String lotNumber) {  //returns all the properties of concrete lot in arraylist
         ArrayList<String> lotInfos = new ArrayList<>();
 
         String sql = "SELECT lotNumber, realEstateRegister, area, geodeticRegion," +
                 " identificationNumber, typeLot, adress, cadastralUnit, description FROM lot WHERE lotNumber = ?";
 
-        try
-        {
+        try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, lotNumber);
@@ -29,29 +28,26 @@ public class DisplayLot {
             ResultSet result = preparedStatement.executeQuery();
 
             if (result.next()) {
-                for(int i = 1 ; i<10; i++) {
+                for (int i = 1; i < 10; i++) {
                     String x = result.getString(i);
                     lotInfos.add(x);
                 }
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return lotInfos;
     }
 
 
+    public void writeToDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,      //the method for adding
+                          String identificationNumber, String typeOfLot, String adress, String cadastralUnit,   //new lot to DB
+                          String description, String loggedUser) {
 
-    public void writeToDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,
-                          String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser){
 
+        String sql = "INSERT INTO lot VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
 
-
-        String sql="INSERT INTO lot VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
-
-        try
-        {
+        try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, lotNumber);
             preparedStatement.setString(2, realEstateRegister);
@@ -64,40 +60,34 @@ public class DisplayLot {
             preparedStatement.setString(9, description);
             preparedStatement.setString(10, loggedUser);
 
-            int numberOfRows= preparedStatement.executeUpdate();
+            int numberOfRows = preparedStatement.executeUpdate();
 
             System.out.println("Completed insert. Number of rows affected:" + numberOfRows);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-///////////////by Adam
-    public void deleteFromDB(String table, int id)
-    {
-        String sql="DELETE FROM lot WHERE lotID = ?";
-        try
-        {
+    ///////////////by Adam
+    public void deleteFromDB(String table, int id) {        //method used to delete entries from DB
+        String sql = "DELETE FROM lot WHERE lotID = ?";
+        try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            int numberOfRows= preparedStatement.executeUpdate();
-            System.out.println("Completed delete. Number of rows affected:"+numberOfRows);
-        } catch (SQLException e)
-        {
+            int numberOfRows = preparedStatement.executeUpdate();
+            System.out.println("Completed delete. Number of rows affected:" + numberOfRows);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-/////////////By Adam
+    /////////////By Adam
     public void updateInDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,
-                           String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser, int lotID)
-    {
-        String sql="UPDATE lot SET lotNumber=?, realEstateRegister=?, area=?, geodeticRegion=?, identificationNumber=?, typeLot=?, adress=?, cadastralUnit=?, description=?, username=? WHERE lotID = ?";
+                           String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser, int lotID) {
+        String sql = "UPDATE lot SET lotNumber=?, realEstateRegister=?, area=?, geodeticRegion=?, identificationNumber=?, typeLot=?, adress=?, cadastralUnit=?, description=?, username=? WHERE lotID = ?";
 
-        try
-        {
+        try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, lotNumber);
             preparedStatement.setString(2, realEstateRegister);
@@ -110,10 +100,9 @@ public class DisplayLot {
             preparedStatement.setString(9, description);
             preparedStatement.setString(10, loggedUser);
             preparedStatement.setInt(11, lotID);
-            int numberOfRows= preparedStatement.executeUpdate();
-            System.out.println("Completed update. Number of rows affected:"+numberOfRows);
-        } catch (SQLException e)
-        {
+            int numberOfRows = preparedStatement.executeUpdate();
+            System.out.println("Completed update. Number of rows affected:" + numberOfRows);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

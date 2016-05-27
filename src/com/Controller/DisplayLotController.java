@@ -10,7 +10,8 @@ import java.util.ArrayList;
  */
 public class DisplayLotController {
 
-    DisplayLot displayLot = new DisplayLot();
+    DisplayLot displayLot = new DisplayLot();//creating displayLot object so we could use methods implemented in
+                                            //DisplayLot class
 
 
     public ArrayList lotInfo(String lotNumber)
@@ -21,8 +22,10 @@ public class DisplayLotController {
 
 
     public void saveToDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,
-                         String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser){
-        displayLot.writeToDB(lotNumber, realEstateRegister, area, geodeticRegion, identificationNumber, typeOfLot, adress, cadastralUnit, description, loggedUser);
+                         String identificationNumber, String typeOfLot, String adress, String cadastralUnit,
+                         String description, String loggedUser){
+        displayLot.writeToDB(lotNumber, realEstateRegister, area, geodeticRegion,
+                identificationNumber, typeOfLot, adress, cadastralUnit, description, loggedUser);
     }
 
     public void deleteFromDB(String table, int ID)
@@ -31,9 +34,11 @@ public class DisplayLotController {
     }
 
     public void updateDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,
-                         String identificationNumber, String typeOfLot, String adress, String cadastralUnit, String description, String loggedUser, int lotID)
+                         String identificationNumber, String typeOfLot, String adress, String cadastralUnit,
+                         String description, String loggedUser, int lotID)
     {
-        displayLot.updateInDB(lotNumber, realEstateRegister, area, geodeticRegion, identificationNumber, typeOfLot, adress, cadastralUnit, description, loggedUser, lotID);
+        displayLot.updateInDB(lotNumber, realEstateRegister, area, geodeticRegion, identificationNumber,
+                typeOfLot, adress, cadastralUnit, description, loggedUser, lotID);
     }
 
 }

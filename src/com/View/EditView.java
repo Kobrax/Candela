@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * Created by Dom on 2016-05-26.
  */
 public class EditView {
-    public void start(String loggedUser){
+    public void start(String loggedUser) {
         EditUserController editUserController = new EditUserController();
 
         Stage stage = new Stage();
@@ -26,7 +26,7 @@ public class EditView {
         Button saveButton = new Button("Save");
         borderPane.setCenter(gridPane);
         Scene scene = new Scene(borderPane, 400, 350);
-        borderPane.setPadding(new Insets(20,20,20,20));
+        borderPane.setPadding(new Insets(20, 20, 20, 20));
         BorderPane.setAlignment(gridPane, Pos.BASELINE_CENTER);
 
         Label userLabel = new Label(loggedUser);
@@ -71,8 +71,8 @@ public class EditView {
             stage.close();
         });
 
-    stage.setScene(scene);
-    stage.show();
-    stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
     }
 }

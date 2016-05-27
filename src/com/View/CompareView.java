@@ -25,7 +25,8 @@ public class CompareView {
     Scene sceneCompare;
     BorderPane layoutCompare;
     Stage stage;
-    public void start(String loggedUser){
+
+    public void start(String loggedUser) {
         stage = new Stage();
         layoutCompare = new BorderPane();
         VBox vBoxCompareLeft = new VBox(20);
@@ -72,16 +73,16 @@ public class CompareView {
 
         Button buttonCompare = new Button("Compare");
         buttonCompare.setOnAction(event1 -> {
-            if(vBoxlayoutCompareCenter.getChildren().size()>1)//checks if there are some lot details already in labels, ignores comboBox
+            if (vBoxlayoutCompareCenter.getChildren().size() > 1)//checks if there are some lot details already in labels, ignores comboBox
             {
-                vBoxlayoutCompareCenter.getChildren().remove(1,10);      //if so it clears them so the new ones could appear
-                vBoxlayoutCompareRight.getChildren().remove(1,10);
+                vBoxlayoutCompareCenter.getChildren().remove(1, 10);      //if so it clears them so the new ones could appear
+                vBoxlayoutCompareRight.getChildren().remove(1, 10);
             }
             System.out.println(compareController.createLotNumberList(loggedUser));
-            if(comboCompare1.getValue()!=null && comboCompare2.getValue()!=null){
+            if (comboCompare1.getValue() != null && comboCompare2.getValue() != null) {
                 String lotNumber1 = comboCompare1.getValue().toString();
                 String lotNumber2 = comboCompare2.getValue().toString();
-                if (!lotNumber1.equals(lotNumber2)  ) {
+                if (!lotNumber1.equals(lotNumber2)) {
                     for (int i = 0; i < 9; i++) {
                         Label lotUnit1 = new Label("");
                         Label lotUnit2 = new Label("");
@@ -94,12 +95,10 @@ public class CompareView {
                         vBoxlayoutCompareCenter.getChildren().add(lotUnit1);
                         vBoxlayoutCompareRight.getChildren().add(lotUnit2);
                     }
-                error.setText("");
-                }
-            else
-                error.setText("         You need to choose 2 different lots!");
-            }
-            else
+                    error.setText("");
+                } else
+                    error.setText("         You need to choose 2 different lots!");
+            } else
                 error.setText("         You need 2 lots to compare!");
         });
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CompareModel {
 
     private static Connection conn;
-    ArrayList<String> lotNumberList = new ArrayList<>();
+    ArrayList<String> lotNumberList = new ArrayList<>(); //declaration of a container for comboboxes content(lot numbers)
 
     public ArrayList createLotNumberList(String loggedUs) {
         try {
@@ -28,7 +28,7 @@ public class CompareModel {
 
             ResultSet result = preparedStatement.executeQuery();
 
-            while (result.next()) {
+            while (result.next()) {                                //adding lotNumbers to our arrayList- one after another from resultset
                     String x = result.getString(1);
                     lotNumberList.add(x);
             }

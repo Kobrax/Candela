@@ -11,15 +11,6 @@ public class LoginController {
 
     LoginModel loginModel = new LoginModel();
     public int ladmin = loginModel.lAdmin;
-    public String loggedUser = loginModel.loggedUser;
-    public boolean logged = loginModel.logged;
-
-
-    public void startLoginWindow(){
-        LoginView loginView = new LoginView();
-        loginView.start();
-    }
-
 
     public boolean logIn(String userName, String password)
     {
