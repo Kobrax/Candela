@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -68,7 +69,17 @@ public class CompareView {
         optionalL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         error.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         compareL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-
+        lotNumberL.setTextFill(Color.SANDYBROWN);
+        realEstateRegisterL.setTextFill(Color.SANDYBROWN);
+        areaL.setTextFill(Color.SANDYBROWN);
+        geodeticRegionL.setTextFill(Color.SANDYBROWN);
+        identificationNumberL.setTextFill(Color.SANDYBROWN);
+        typeLotL.setTextFill(Color.SANDYBROWN);
+        adressL.setTextFill(Color.SANDYBROWN);
+        cadastralUnitL.setTextFill(Color.SANDYBROWN);
+        optionalL.setTextFill(Color.SANDYBROWN);
+        error.setTextFill(Color.SANDYBROWN);
+        compareL.setTextFill(Color.SANDYBROWN);
         /////////////////////////////////////////
 
         Button buttonCompare = new Button("Compare");
@@ -92,6 +103,8 @@ public class CompareView {
                         lotUnit2.setText(b);
                         lotUnit1.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
                         lotUnit2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+                        lotUnit1.setTextFill(Color.SANDYBROWN);
+                        lotUnit2.setTextFill(Color.SANDYBROWN);
                         vBoxlayoutCompareCenter.getChildren().add(lotUnit1);
                         vBoxlayoutCompareRight.getChildren().add(lotUnit2);
                     }
@@ -111,6 +124,9 @@ public class CompareView {
         layoutCompare.setBottom(hBoxCompareBottom);
 
         sceneCompare = new Scene(layoutCompare, 600, 400);
+        layoutCompare.setId("backgroundImage");
+        sceneCompare.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
         stage.setScene(sceneCompare);
         stage.show();
     }
