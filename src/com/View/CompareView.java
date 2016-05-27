@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -41,8 +43,9 @@ public class CompareView {
             stage.close();
         });
 
-        ///////adding content to labels/////////
+        ///////adding names to labels and setting their font properties/////////
         compareL = new Label("Compare two lots:  \n");
+
         lotNumberL = new Label("Lot Number:              ");
         realEstateRegisterL = new Label("Real Estate Register:  ");
         areaL = new Label("Area:             ");
@@ -53,6 +56,17 @@ public class CompareView {
         cadastralUnitL = new Label("Cadastral Unit:        ");
         optionalL = new Label("Optional Info:         ");
         error = new Label("");
+        lotNumberL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        realEstateRegisterL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        areaL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        geodeticRegionL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        identificationNumberL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        typeLotL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        adressL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        cadastralUnitL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        optionalL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        error.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        compareL.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 
         /////////////////////////////////////////
 
@@ -75,6 +89,8 @@ public class CompareView {
                         String b = displayLotController.lotInfo(lotNumber2).get(i).toString();
                         lotUnit1.setText(a);
                         lotUnit2.setText(b);
+                        lotUnit1.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+                        lotUnit2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
                         vBoxlayoutCompareCenter.getChildren().add(lotUnit1);
                         vBoxlayoutCompareRight.getChildren().add(lotUnit2);
                     }
@@ -95,7 +111,7 @@ public class CompareView {
         layoutCompare.setRight(vBoxlayoutCompareRight);
         layoutCompare.setBottom(hBoxCompareBottom);
 
-        sceneCompare = new Scene(layoutCompare, 500, 400);
+        sceneCompare = new Scene(layoutCompare, 600, 400);
         stage.setScene(sceneCompare);
         stage.show();
     }
