@@ -98,11 +98,10 @@ public class RegisterView {
                 "    -fx-text-fill: white;\n" +
                 "    -fx-font-size: 12px;");
 
-        //locating the text fields and labels
+        //locating the text fields and labels in gridPane
 
         exitAndRegister.getChildren().addAll(exit);
         GridPane.setConstraints(scenetitle, 0, 0);
-        GridPane.setConstraints(errorLabel, 0, 1);
         GridPane.setConstraints(userLabel, 0, 2);
         GridPane.setConstraints(userField, 1, 2);
         GridPane.setConstraints(passwordLabel, 0, 3);
@@ -115,9 +114,8 @@ public class RegisterView {
         GridPane.setConstraints(lAreaField, 1, 6);
         GridPane.setConstraints(emailLabel, 0, 7);
         GridPane.setConstraints(emailField, 1, 7);
-
-
         GridPane.setConstraints(register, 1, 8);
+        GridPane.setConstraints(errorLabel, 1, 9);
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -134,9 +132,13 @@ public class RegisterView {
             String area = lAreaField.getText();
             String name = nameField.getText();
             String surname = surnameField.getText();
+            if(userName.equals("") || password.equals("") || email.equals("") || area.equals("") || name.equals("") || surname.equals(""))
+                errorLabel.setText("FILL ALL THE FIELDS!");
+            else
+            {
             registerController.registerUser(userName, password, email, area, name, surname);
             viewController.startLogin();
-            stage.close();
+            stage.close();}
         });
 
         exit.setOnAction(event -> {

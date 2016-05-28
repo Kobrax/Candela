@@ -58,7 +58,7 @@ public class LoginView {
         userField.setStyle("-fx-font-size: 16");
         Label password = new Label("Password");
         password.setStyle("-fx-font-size: 20");
-        final TextField passwordText = new TextField();
+        final PasswordField passwordText = new PasswordField();
         passwordText.setStyle("-fx-font-size: 16");
         Button logIn = new Button("Log In");
         Button exit = new Button("Exit");
@@ -101,18 +101,17 @@ public class LoginView {
         exitAndRegister.setPadding(new Insets(10, 5, 5, 10));
         exitAndRegister.setSpacing(5);
         GridPane.setConstraints(scenetitle, 0, 0);
-        GridPane.setConstraints(errorLabel, 0, 1);
         GridPane.setConstraints(user, 0, 2);
-        GridPane.setConstraints(userField, 1, 2);
+        GridPane.setConstraints(userField, 1, 2, 2, 1);
         GridPane.setConstraints(password, 0, 3);
-        GridPane.setConstraints(passwordText, 1, 3);
+        GridPane.setConstraints(passwordText, 1, 3, 2, 1);
         GridPane.setConstraints(logIn, 1, 4);
-        GridPane.setConstraints(register, 1, 5);
+        GridPane.setConstraints(errorLabel, 1, 5, 1, 2);
 
         gridPane.setAlignment(Pos.CENTER);
 
 
-        gridPane.getChildren().addAll(scenetitle, errorLabel, user, userField, password, passwordText, logIn);
+        gridPane.getChildren().addAll(scenetitle, user, userField, password, passwordText, logIn, errorLabel);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -126,9 +125,9 @@ public class LoginView {
                 if (loginController.ladmin == 0) {
                     viewController.startMenu(userSField);
                     primaryStage.close();
-                } else {
-                    errorLabel.setText("Wrong User Name or Password, try again.");
                 }
+            }else {
+                errorLabel.setText("Wrong User Name or Password!");
             }
         });
 
