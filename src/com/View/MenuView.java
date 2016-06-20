@@ -1,6 +1,7 @@
 package com.View;
 
 import com.Controller.DisplayLotController;
+import com.Controller.LoginController;
 import com.Controller.LotTableController;
 import com.Controller.ViewController;
 import javafx.collections.ObservableList;
@@ -37,10 +38,11 @@ public class MenuView {
     TextField descriptionT = new TextField();
 
 
-    public void start(String loggedUser) {
+    public void start(String loggedUser, Boolean admin) {
         LotTableController lotTableController = new LotTableController();
         DisplayLotController displayLotController = new DisplayLotController();
         ViewController viewController = new ViewController();
+        LoginController loginController = new LoginController();
 
         Stage stage= new Stage();
         HBox hBox = new HBox(5);
@@ -111,9 +113,12 @@ public class MenuView {
 
 
         BorderPane borderPane1 = new BorderPane();
-        Scene scene1 = new Scene(borderPane1, 800, 730);
+        Scene scene1 = new Scene(borderPane1, 1000, 730);
         lotTableController.tableView = new TableView();
-        lotTableController.createTable(loginUser[0],"");
+        if(admin == true){
+            lotTableController.createATable("");
+        }else{
+        lotTableController.createTable(loginUser[0],"");}
 
         Button compareButton = new Button("Compare");
         VBox tableVbox = new VBox();
@@ -232,7 +237,12 @@ public class MenuView {
             System.out.println(wildcard);
 
             lotTableController.tableView.getColumns().clear();
-            lotTableController.createTable(loginUser[0], wildcard);
+            if (admin == true) {
+                lotTableController.createATable(wildcard);
+            }
+            else {
+                lotTableController.createTable(loginUser[0], wildcard);
+            }
             clear();
         });
 
@@ -247,7 +257,7 @@ public class MenuView {
 
         compareButton.setOnAction(event1 ->
         {
-            viewController.startCompare(loggedUser);
+            viewController.startCompare(loggedUser, admin);
         });
 
         saveButton.setOnAction(event ->

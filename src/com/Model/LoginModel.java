@@ -8,7 +8,6 @@ import java.sql.*;
 public class LoginModel {
     public static Connection conn = null;
     public String loggedUser = null;
-    public boolean logged = false;
     public int lAdmin;
 
     public void connectToDB() {
@@ -44,6 +43,7 @@ public class LoginModel {
                     loggedUser = dbUsername;
                     logged = true;
                     lAdmin = dbAdmin;
+
                 }
             }
 
@@ -52,4 +52,30 @@ public class LoginModel {
         }
         return logged;
     }
+
+    public boolean isAdmin(String userName) {
+        String dbUser;
+        int dbAdmin;
+        boolean logged = false;
+        try {
+            String sql = "SELECT userName, isAdmin FROM users";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                dbUser = rs.getString("userName");
+                dbAdmin = rs.getInt("isAdmin");
+
+                if (userName.equals(dbUser) && dbAdmin == 1) {
+                    loggedUser = dbUser;
+                    logged = true;
+                    lAdmin = dbAdmin;
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return logged;
+    }
+
 }

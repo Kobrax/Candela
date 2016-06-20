@@ -49,6 +49,32 @@ public class LotTableController {
         }
     }
 
+
+    public void createATable(String wildcard) {
+        data = FXCollections.observableArrayList();
+        String enteredByUser = "%" + wildcard + "%";
+        try {
+
+            String DB_URL = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7119030";
+            String USER = "sql7119030";
+            String PASS = "ira72lBrrp";
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            String sql = "SELECT lotID, lotNumber, realEstateRegister, area, userName FROM lot where lotNumber like ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, enteredByUser);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            tableMethod(result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Database problem123");
+
+        }
+    }
+
     public void tableMethod(ResultSet result){
         try{
             // create coulmn

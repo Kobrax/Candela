@@ -16,5 +16,8 @@ public class CompareController {
         return compareModel.createLotNumberList(loggedUs);
     }
 
+    public ArrayList createAdminLotNumberList(){
+        return compareModel.createLotNumberListA();
+    }
 
 }

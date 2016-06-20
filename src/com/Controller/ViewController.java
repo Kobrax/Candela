@@ -10,10 +10,10 @@ public class ViewController {
 
     //////CONTROLLER CLASS CREATED TO CONTAIN ALL OF THE STAGES START METHODS IN ONE PLACE/////////
 
-    public void startMenu(String loggedUser)        //opening main menu
+    public void startMenu(String loggedUser, Boolean admin)        //opening main menu
     {
         MenuView menuView = new MenuView();
-        menuView.start(loggedUser);
+        menuView.start(loggedUser, admin);
     }
 
     public void startRegister()         //opening register window
@@ -38,10 +38,10 @@ public class ViewController {
         editView.start(loggedUser);
     }
 
-    public void startCompare(String loggedUser)     //starts the compare window
+    public void startCompare(String loggedUser, Boolean admin)     //starts the compare window
     {
         CompareView compareView = new CompareView();
-        compareView.start(loggedUser);
+        compareView.start(loggedUser, admin);
     }
 
 

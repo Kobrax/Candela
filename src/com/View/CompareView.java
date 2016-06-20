@@ -27,7 +27,7 @@ public class CompareView {
     BorderPane layoutCompare;
     Stage stage;
 
-    public void start(String loggedUser) {
+    public void start(String loggedUser, Boolean admin) {
         stage = new Stage();
         layoutCompare = new BorderPane();
         VBox vBoxCompareLeft = new VBox(20);
@@ -35,9 +35,17 @@ public class CompareView {
         VBox vBoxlayoutCompareRight = new VBox(20);
         HBox hBoxCompareBottom = new HBox();
         ComboBox comboCompare1 = new ComboBox();
-        comboCompare1.getItems().addAll(compareController.createLotNumberList(loggedUser));
         ComboBox comboCompare2 = new ComboBox();
-        comboCompare2.getItems().addAll(compareController.createLotNumberList(loggedUser));
+        if (admin == false) {
+            comboCompare1.getItems().addAll(compareController.createLotNumberList(loggedUser));
+            comboCompare2.getItems().addAll(compareController.createLotNumberList(loggedUser));
+        }else if (admin == true)
+        {
+            comboCompare1.getItems().addAll(compareController.createAdminLotNumberList());
+            comboCompare2.getItems().addAll(compareController.createAdminLotNumberList());
+        }
+
+
         vBoxlayoutCompareCenter.getChildren().add(comboCompare1);
         vBoxlayoutCompareRight.getChildren().add(comboCompare2);
         buttonBackCompare.setOnAction(event ->
@@ -123,7 +131,7 @@ public class CompareView {
         layoutCompare.setRight(vBoxlayoutCompareRight);
         layoutCompare.setBottom(hBoxCompareBottom);
 
-        sceneCompare = new Scene(layoutCompare, 600, 400);
+        sceneCompare = new Scene(layoutCompare, 600, 450);
         layoutCompare.setId("backgroundImage");
         sceneCompare.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 

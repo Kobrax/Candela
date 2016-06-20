@@ -122,11 +122,10 @@ public class LoginView {
             String userSField = userField.getText();
             String passwordField = passwordText.getText();
             if (loginController.logIn(userSField, passwordField)) {
-                if (loginController.ladmin == 0) {
-                    viewController.startMenu(userSField);
-                    primaryStage.close();
-                }
-            }else {
+                viewController.startMenu(userSField, loginController.isAdmin(userSField));
+                primaryStage.close();
+                System.out.println(loginController.isAdmin(userSField));
+            } else {
                 errorLabel.setText("Wrong User Name or Password!");
             }
         });

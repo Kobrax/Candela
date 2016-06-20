@@ -40,4 +40,30 @@ public class CompareModel {
         }
         return lotNumberList;
     }
+
+    public ArrayList createLotNumberListA() {
+        try {
+
+            String DB_URL = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7119030";
+            String USER = "sql7119030";
+            String PASS = "ira72lBrrp";
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            String sql = "SELECT lotNumber FROM lot";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next()) {                                //adding lotNumbers to our arrayList- one after another from resultset
+                String x = result.getString(1);
+                lotNumberList.add(x);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Database problem123");
+
+        }
+        return lotNumberList;
+    }
 }
