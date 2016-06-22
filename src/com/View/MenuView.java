@@ -92,7 +92,7 @@ public class MenuView {
         hyperlink.setGraphic(imageView);
 
         hBox.getChildren().addAll(saveButton, clearButton);
-        hBox.setAlignment(Pos.BASELINE_RIGHT); ;
+        hBox.setAlignment(Pos.BASELINE_RIGHT);
         mapVBox.getChildren().addAll(hBox, hyperlink);
         mapVBox.setSpacing(30);
 
@@ -207,133 +207,138 @@ public class MenuView {
 
         ////////displaying lot info in textFields//////////
 
-        lotTableController.tableView.setRowFactory(tableView -> {
-            TableRow<ObservableList> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && (!row.isEmpty())) {
-                    ObservableList<String> getData = row.getItem();
-                    String lotN = getData.get(1);
-                    lotNumberT.setText(displayLotController.lotInfo(lotN).get(0).toString());
-                    realEstateRegisterT.setText(displayLotController.lotInfo(lotN).get(1).toString());
-                    areaT.setText(displayLotController.lotInfo(lotN).get(2).toString());
-                    geodeticRegionT.setText(displayLotController.lotInfo(lotN).get(3).toString());
-                    identificationNumberT.setText(displayLotController.lotInfo(lotN).get(4).toString());
-                    typeLotT.setText(displayLotController.lotInfo(lotN).get(5).toString());
-                    addressT.setText(displayLotController.lotInfo(lotN).get(6).toString());
-                    cadastralUnitT.setText(displayLotController.lotInfo(lotN).get(7).toString());
-                    descriptionT.setText(displayLotController.lotInfo(lotN).get(8).toString());
+    lotTableController.tableView.setRowFactory(tableView -> {
+        TableRow<ObservableList> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1 && (!row.isEmpty())) {
+                ObservableList<String> getData = row.getItem();
+                String lotN = getData.get(1);
+                lotNumberT.setText(displayLotController.lotInfo(lotN).get(0).toString());
+                realEstateRegisterT.setText(displayLotController.lotInfo(lotN).get(1).toString());
+                areaT.setText(displayLotController.lotInfo(lotN).get(2).toString());
+                geodeticRegionT.setText(displayLotController.lotInfo(lotN).get(3).toString());
+                identificationNumberT.setText(displayLotController.lotInfo(lotN).get(4).toString());
+                typeLotT.setText(displayLotController.lotInfo(lotN).get(5).toString());
+                addressT.setText(displayLotController.lotInfo(lotN).get(6).toString());
+                cadastralUnitT.setText(displayLotController.lotInfo(lotN).get(7).toString());
+                descriptionT.setText(displayLotController.lotInfo(lotN).get(8).toString());
 
 
-                }
-            });
-            return row;
+            }
         });
+        return row;
+    });
 
-        ////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
 
-        ////////////////////SETTING SEARCH BUTTON ON ACTION//////////////
-        searchButton.setOnAction(event2 -> {
-            String wildcard = searchfield.getText();
-            System.out.println(wildcard);
+    ////////////////////SETTING SEARCH BUTTON ON ACTION//////////////
+    searchButton.setOnAction(event2 -> {
+        String wildcard = searchfield.getText();
+        System.out.println(wildcard);
 
+        lotTableController.tableView.getColumns().clear();
+        if (admin == true) {
+            lotTableController.createATable(wildcard);
+        }
+        else {
+            lotTableController.createTable(loginUser[0], wildcard);
+        }
+        clear();
+    });
+
+    ////////////////////////////////////////////////////////////////
+
+
+    add.setOnAction(event1 ->
+    {
+        emptyLabel2.setText("New");
+    });
+
+
+    compareButton.setOnAction(event1 ->
+    {
+        viewController.startCompare(loggedUser, admin);
+    });
+
+    saveButton.setOnAction(event ->
+    {
+        if (emptyLabel2.getText().equals("New")) {
+            displayLotController.saveToDB(lotNumberT.getText(), realEstateRegisterT.getText(),
+                    Double.parseDouble(areaT.getText()), geodeticRegionT.getText(), identificationNumberT.getText(),
+                    typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loginUser[0]);
+
+            lotTableController.data.removeAll(lotTableController.data);
             lotTableController.tableView.getColumns().clear();
-            if (admin == true) {
-                lotTableController.createATable(wildcard);
-            }
-            else {
-                lotTableController.createTable(loginUser[0], wildcard);
-            }
+
+            lotTableController.createTable(loginUser[0], "");
+
+
             clear();
-        });
 
-        ////////////////////////////////////////////////////////////////
-
-
-        add.setOnAction(event1 ->
-        {
-            emptyLabel2.setText("New");
-        });
-
-
-        compareButton.setOnAction(event1 ->
-        {
-            viewController.startCompare(loggedUser, admin);
-        });
-
-        saveButton.setOnAction(event ->
-        {
-            if (emptyLabel2.getText().equals("New")) {
-                displayLotController.saveToDB(lotNumberT.getText(), realEstateRegisterT.getText(),
-                        Double.parseDouble(areaT.getText()), geodeticRegionT.getText(), identificationNumberT.getText(),
-                        typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loginUser[0]);
-
-                lotTableController.data.removeAll(lotTableController.data);
-                lotTableController.tableView.getColumns().clear();
-
-                lotTableController.createTable(loginUser[0], "");
-
-
-                clear();
-
-            } else if (emptyLabel2.getText().equals("Edit")) {
-                int rowIndex = lotTableController.tableView.getSelectionModel().getSelectedIndex();
-                ObservableList rowList = (ObservableList) lotTableController.tableView.getItems().get(rowIndex);
-                int columnIndex = 0;
-                int value = Integer.parseInt(rowList.get(columnIndex).toString());
-
-                displayLotController.updateDB(lotNumberT.getText(), realEstateRegisterT.getText(),
-                        Double.parseDouble(areaT.getText()), geodeticRegionT.getText(), identificationNumberT.getText(),
-                        typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loginUser[0], value);
-
-                clear();
-
-            } else System.out.println("Ups, something go wrong " + loginUser[0]);
-
-        });
-
-        delete.setOnAction(event -> {
+        } else if (emptyLabel2.getText().equals("Edit")) {
             int rowIndex = lotTableController.tableView.getSelectionModel().getSelectedIndex();
             ObservableList rowList = (ObservableList) lotTableController.tableView.getItems().get(rowIndex);
             int columnIndex = 0;
             int value = Integer.parseInt(rowList.get(columnIndex).toString());
 
-            displayLotController.deleteFromDB("lot", value);
+            displayLotController.updateDB(lotNumberT.getText(), realEstateRegisterT.getText(),
+                    Double.parseDouble(areaT.getText()), geodeticRegionT.getText(), identificationNumberT.getText(),
+                    typeLotT.getText(), addressT.getText(), cadastralUnitT.getText(), descriptionT.getText(), loginUser[0], value);
 
-            lotTableController.data.removeAll(lotTableController.data);
-            lotTableController.tableView.getColumns().clear();
-            lotTableController.createTable(loginUser[0], "");
-        });
-
-        clearButton.setOnAction(event ->
-        {
             clear();
-        });
+
+        } else System.out.println("Ups, something go wrong " + loginUser[0]);
+
+    });
+
+    delete.setOnAction(event -> {
+        int rowIndex = lotTableController.tableView.getSelectionModel().getSelectedIndex();
+        ObservableList rowList = (ObservableList) lotTableController.tableView.getItems().get(rowIndex);
+        int columnIndex = 0;
+        int value = Integer.parseInt(rowList.get(columnIndex).toString());
+
+        displayLotController.deleteFromDB("lot", value);
+
+        lotTableController.data.removeAll(lotTableController.data);
+        lotTableController.tableView.getColumns().clear();
+        lotTableController.createTable(loginUser[0], "");
+    });
+
+    clearButton.setOnAction(event ->
+    {
+        clear();
+    });
 
 
-        logOutButton.setOnAction(event ->
-        {
-            viewController.startLogin();
-            loginUser[0] = null;
-            stage.close();
+    logOutButton.setOnAction(event ->
+    {
+        viewController.startLogin();
+        loginUser[0] = null;
+        stage.close();
 
-        });
+    });
 
-        edit.setOnAction(event ->
-        {
-            emptyLabel2.setText("Edit");
-        });
+    edit.setOnAction(event ->
+    {
+        emptyLabel2.setText("Edit");
+    });
 
-        stage.setResizable(false);
-        stage.setScene(scene1);
-        stage.show();
+    stage.setResizable(false);
+    stage.setScene(scene1);
+    stage.show();
 
 
-        editUser.setOnAction(event ->
-        {
+    editUser.setOnAction(event ->
+    {
+        if (admin == false) {
             viewController.editUser(loggedUser);
-        });
+        }else if (admin == true)
+        {
+            viewController.startAdminEdit();
+        }
+    });
 
-    }
+}
 
     public void clear()
     {

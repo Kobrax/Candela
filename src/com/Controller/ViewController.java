@@ -44,5 +44,10 @@ public class ViewController {
         compareView.start(loggedUser, admin);
     }
 
+    public void startAdminEdit()
+    {
+        AdminUserView adminUserView = new AdminUserView();
+        adminUserView.start();
+    }
 
 }

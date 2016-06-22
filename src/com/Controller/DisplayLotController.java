@@ -20,7 +20,6 @@ public class DisplayLotController {
     }
 
 
-
     public void saveToDB(String lotNumber, String realEstateRegister, Double area, String geodeticRegion,
                          String identificationNumber, String typeOfLot, String adress, String cadastralUnit,
                          String description, String loggedUser){
