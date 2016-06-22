@@ -85,7 +85,7 @@ public class AdminUserView {
         lotManageGridPane.addColumn(1, emptyLabel2, userName, email, password, livingArea,
                 name, surname, hBox);
 
-        final Label labelLot = new Label("Your lots");
+        final Label labelLot = new Label("Users");
         labelLot.setFont(new Font("Arial", 20));
 
         VBox tableVbox = new VBox();
